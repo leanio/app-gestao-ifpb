@@ -1,0 +1,26 @@
+
+body {
+  background-color: #007F4C ;
+  height: fit-content;
+}
+.ui-button-success {
+  background-color: gray;
+}
+.ui-button-success:not([disabled]) {
+  background-color: #00965E;
+}
+.ui-button-success:not([disabled]):hover {
+  background-color: #006842;
+}
+.inscrever{
+  background-color: #00965E;
+}
+.inscrever:not([disabled]):hover {
+  background-color: #006842;
+}
+
+
+
+
+
+

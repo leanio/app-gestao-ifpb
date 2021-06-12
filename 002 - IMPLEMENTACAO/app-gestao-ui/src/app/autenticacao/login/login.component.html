@@ -1,36 +1,52 @@
-<div class="container"> 
-  <div class="p-col-12 p-mx-auto p-fluid">
-    <form autocomplete="off" #formularioLogin="ngForm">
-      
-        <div class="p-text-center">
-          <h1>AUTENTICAÇÃO</h1>
+
+<div class="p-grid p-jc-center p-ai-center " style="min-height: 100vh;">
+
+  <div class="p-card p-jc-center p-ai-center p-flex-column p-shadow-10"
+    style="background-color: #00663B; width: 400px; height: 500px; border-radius: 25px; ">
+
+    <div style="text-align: center; height: 110px;">
+      <H1 class="p-text-bold" style="color: white;">PROCESS MANAGER</H1>
+      <H5 style="color: white;">Organize seus processos</H5>
+    </div>
+
+    <div  style="background-color: white; border-radius: 25px; text-align: center; height: 70%; margin-left: 5%; margin-right: 5%;">
+
+      <form autocomplete="off" #formularioLogin="ngForm">
+
+        <div style="text-align: center; ">
+
+          <H4 style="padding-top: 20px; padding-bottom: 20px;">FAÇA LOGIN NA SUA CONTA</H4>
         </div>
-  
-        <div class="p-py-4">
-          <span class="p-float-label">
-            <input id="inputEmail" type="text" pInputText name="inputEmail" ngModel required #inputEmail> 
-            <label for="inputEmail">E-mail</label>
+
+
+          <span class="p-input-icon-left" style="width: 90%;">
+          <i class="pi pi-envelope"></i>
+          <input id="inputEmail" type="text" pInputText name="inputEmail" ngModel required #inputEmail
+            placeholder="Digite seu e-mail" style="width: 100%;">
           </span>
-        </div>
 
-        <div class="p-py-2">
-          <span class="p-float-label">
-            <input id="inputSenha" type="password" pInputText name="inputSenha" ngModel required #inputSenha> 
-            <label for="inputSenha">Senha</label>
+
+          <span class="p-input-icon-left" style="width: 90%; margin-top: 10px;">
+            <i class="pi pi-key"></i>
+          <input id="inputSenha" type="password" pInputText name="inputSenha" ngModel required #inputSenha
+            placeholder="Digite sua senha"  style="width: 100%; ">
           </span>
-        </div>
-  
-        <div class="p-py-2">
-          <button name="login" [disabled]="formularioLogin.invalid" pButton label="Entrar" (click)="login(inputEmail.value, inputSenha.value); inputSenha.value=''"></button>
+
+        <div>
+          <h5>Esqueceu a senha?</h5>
         </div>
 
-        <div class="p-py-2">
-          <button name="login" pButton label="Teste" (click)="teste()"></button>
+        <div>
+          <button class="ui-button-success" name="login" [disabled]="formularioLogin.invalid" style="width: 90%; margin-top: 10px;" pButton label="ENTRAR"
+            (click)="login(inputEmail.value, inputSenha.value); inputSenha.value=''"></button>
         </div>
-  
-    </form>
 
-    {{authService.jwtPayload | json}}
-  
+        <div>
+          <button class="inscrever" name="inscrever" style="width: 90%; margin-top: 10px;" pButton label="INSCREVER-SE"
+            (click)="login(inputEmail.value, inputSenha.value); inputSenha.value=''"></button>
+        </div>
+
+      </form>
+    </div>
   </div>
 </div>

@@ -29,7 +29,7 @@ export class ProcessoPesquisaComponent implements OnInit {
   }
 
   buscar(): void {
-    this.processoService.buscar(1, 1).then(dados => {
+    this.processoService.buscar(this.codigoCampus, this.codigoProcesso).then(dados => {
       this.processo = dados;
     })
   }
