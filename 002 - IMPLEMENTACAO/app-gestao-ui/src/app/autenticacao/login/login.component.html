@@ -1,0 +1,36 @@
+<div class="container"> 
+  <div class="p-col-12 p-mx-auto p-fluid">
+    <form autocomplete="off" #formularioLogin="ngForm">
+      
+        <div class="p-text-center">
+          <h1>AUTENTICAÇÃO</h1>
+        </div>
+  
+        <div class="p-py-4">
+          <span class="p-float-label">
+            <input id="inputEmail" type="text" pInputText name="inputEmail" ngModel required #inputEmail> 
+            <label for="inputEmail">E-mail</label>
+          </span>
+        </div>
+
+        <div class="p-py-2">
+          <span class="p-float-label">
+            <input id="inputSenha" type="password" pInputText name="inputSenha" ngModel required #inputSenha> 
+            <label for="inputSenha">Senha</label>
+          </span>
+        </div>
+  
+        <div class="p-py-2">
+          <button name="login" [disabled]="formularioLogin.invalid" pButton label="Entrar" (click)="login(inputEmail.value, inputSenha.value); inputSenha.value=''"></button>
+        </div>
+
+        <div class="p-py-2">
+          <button name="login" pButton label="Teste" (click)="teste()"></button>
+        </div>
+  
+    </form>
+
+    {{authService.jwtPayload | json}}
+  
+  </div>
+</div>

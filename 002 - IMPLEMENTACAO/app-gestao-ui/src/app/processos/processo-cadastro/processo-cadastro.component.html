@@ -1,0 +1,18 @@
+<form #formCadastroProcesso="ngForm" (ngSubmit)="adicionar()">
+    <div class="p-shadow-22 p-col-11 p-p-4 p-mx-auto">
+    <div class="p-fluid p-col-10 p-mx-auto">
+        <div class="p-text-center">
+            <h1>CADASTRO DE PROCESSO</h1> 
+        </div>
+        <div class="p-py-3">
+            <span class="p-float-label">
+                <input [(ngModel)]="processo.nome" pInputText type="text" name="inputNome" ngModel #inputNome="ngModel" minlength="5" required>
+                <label for="inputNome">Nome</label>
+            </span>
+        </div>
+        <div class="p-col-5 p-mx-auto">
+            <button pButton type="submit" label="CADASTRAR" [disabled] = "formCadastroProcesso.invalid" style="font-weight: bold; font-size: 20px;"></button>
+        </div>
+    </div>
+    </div>
+</form>

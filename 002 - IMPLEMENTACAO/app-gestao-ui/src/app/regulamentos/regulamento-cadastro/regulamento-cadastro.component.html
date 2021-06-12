@@ -1,0 +1,10 @@
+<div>
+    <form #formCadastroProcesso="ngForm" (ngSubmit)="onSubmit()">      
+      <div>
+        <input type="file" name="regulamentopdf" (change)="onFileSelect($event)" />
+      </div>
+      <div>
+        <button type="submit">Upload</button>
+      </div>
+    </form>
+</div>

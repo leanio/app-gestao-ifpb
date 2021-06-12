@@ -1,0 +1,129 @@
+<p-tabView>
+    <p-tabPanel header="FAQs">
+        <div>
+            <h1>FAQs</h1>
+        </div>
+        <div class="p-p-1" *ngFor="let faq of processo.faqs">
+            <p-card header={{faq.pergunta}} subheader="Situação: {{faq.ativa ? 'Ativa':'Não está ativa'}}">
+                <ng-template pTemplate="header"></ng-template>
+                <p>{{faq.resposta}}</p>
+            </p-card>
+        </div>
+    </p-tabPanel>
+    <p-tabPanel header="Anexos">
+        <div>
+            <h1>Anexos</h1>
+        </div>
+        <p-table [value]="processo.anexos" [paginator]="true" [rows]="20">
+            <ng-template pTemplate="header">
+                <tr>
+                    <th>ID
+                        <p-columnFilter type="text" field="id" display="menu"></p-columnFilter>
+                    </th>
+                    <th>ID DOCUMENTO
+                        <p-columnFilter type="text" field="email" display="menu"></p-columnFilter>
+                    </th>
+                    <th>TIPO DO ARQUIVO
+                        <p-columnFilter type="text" field="matricula" display="menu"></p-columnFilter>
+                    </th>
+                    <th>NOME DO PDF
+                        <p-columnFilter type="text" field="nome" display="menu"></p-columnFilter>
+                    </th>
+                    <th>PDF
+                        <p-columnFilter type="text" field="nome" display="menu"></p-columnFilter>
+                    </th>
+                    
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-anexo>
+                <tr>
+                    <td>{{anexo.id}}</td>
+                    <td>{{anexo.documento.id}}</td>
+                    <td>{{anexo.documento.contentType}}</td>
+                    <td>{{anexo.documento.nomeArquivo}}</td>
+                    <td><button pButton (click)="abrirArquivo(anexo.documento.url)" label="Abrir"></button></td>
+                </tr>
+            </ng-template>
+        </p-table>
+    </p-tabPanel>
+    <p-tabPanel header="Guias">
+        <div>
+            <h1>Guias</h1>
+        </div>
+        <p-table [value]="processo.guias" [paginator]="true" [rows]="20">
+            <ng-template pTemplate="header">
+                <tr>
+                    <th>ID
+                        <p-columnFilter type="text" field="id" display="menu"></p-columnFilter>
+                    </th>
+                    <th>ID DOCUMENTO
+                        <p-columnFilter type="text" field="email" display="menu"></p-columnFilter>
+                    </th>
+                    <th>TIPO DO ARQUIVO
+                        <p-columnFilter type="text" field="matricula" display="menu"></p-columnFilter>
+                    </th>
+                    <th>NOME DO PDF
+                        <p-columnFilter type="text" field="nome" display="menu"></p-columnFilter>
+                    </th>
+                    <th>PDF
+                        <p-columnFilter type="text" field="nome" display="menu"></p-columnFilter>
+                    </th>
+                    
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-guia>
+                <tr>
+                    <td>{{guia.id}}</td>
+                    <td>{{guia.documento.id}}</td>
+                    <td>{{guia.documento.contentType}}</td>
+                    <td>{{guia.documento.nomeArquivo}}</td>
+                    <td><button pButton (click)="abrirArquivo(guia.documento.url)" label="Abrir"></button></td>
+                </tr>
+            </ng-template>
+        </p-table>
+        
+    </p-tabPanel>
+    <p-tabPanel header="Regulamentos">
+        <div>
+            <h1>Regulamentos</h1>
+        </div>
+        <p-table [value]="processo.regulamentos" [paginator]="true" [rows]="20">
+            <ng-template pTemplate="header">
+                <tr>
+                    <th>ID
+                        <p-columnFilter type="text" field="id" display="menu"></p-columnFilter>
+                    </th>
+                    <th>ID DOCUMENTO
+                        <p-columnFilter type="text" field="email" display="menu"></p-columnFilter>
+                    </th>
+                    <th>TIPO DO ARQUIVO
+                        <p-columnFilter type="text" field="matricula" display="menu"></p-columnFilter>
+                    </th>
+                    <th>NOME DO PDF
+                        <p-columnFilter type="text" field="nome" display="menu"></p-columnFilter>
+                    </th>
+                    <th>URL
+                        <p-columnFilter type="text" field="nome" display="menu"></p-columnFilter>
+                    </th>
+                    
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-regulamento>
+                <tr>
+                    <td>{{regulamento.id}}</td>
+                    <td>{{regulamento.documento.id}}</td>
+                    <td>{{regulamento.documento.contentType}}</td>
+                    <td>{{regulamento.documento.nomeArquivo}}</td>
+                    <td><button pButton (click)="abrirArquivo(regulamento.documento.url)" label="Abrir"></button></td>
+                </tr>
+            </ng-template>
+        </p-table>
+    </p-tabPanel>
+</p-tabView>
+
+<div>
+    <div>
+        {{processo.id}}
+        {{processo.nome}}
+    </div>
+</div>

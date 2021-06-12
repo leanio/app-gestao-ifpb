@@ -1,0 +1,41 @@
+<form #formCadastroCampus="ngForm" (ngSubmit)="adicionar()">
+    <div class="p-shadow-22 p-col-11 p-p-4 p-mx-auto">
+        <div class="p-fluid p-col-10 p-mx-auto">
+            <div class="p-text-center">
+                <h1>CADASTRO DE CAMPUS</h1> 
+            </div>
+            <div class="p-py-3">
+                <span class="p-float-label">
+                    <input [(ngModel)]="campus.nomeCampus" pInputText type="text" name="inputCampus" ngModel #inputCampus="ngModel" minlength="5" required>
+                    <label for="inputNome">Campus</label>
+                </span>
+            </div>
+            <div class="p-py-3">
+                <span class="p-float-label">
+                    <input [(ngModel)]="campus.nomeInstituicao" pInputText type="text" name="inputInstituicao" ngModel #inputInstituicao="ngModel" minlength="5" required>
+                    <label for="inputNome">Instituição</label>
+                </span>
+            </div>
+            <div class="p-py-3">
+                <span class="p-float-label">
+                    <input [(ngModel)]="campus.protocolo.email" pInputText type="text" name="inputEmail" ngModel #inputEmail="ngModel" minlength="5" required>
+                    <label for="inputNome">E-mail do protocolo</label>
+                </span>
+            </div>
+            <div class="p-py-3">
+                <span class="p-float-label">
+                    <input [(ngModel)]="campus.protocolo.telefone" pInputText type="text" name="inputTelefone" ngModel #inputTelefone="ngModel" minlength="5" required>
+                    <label for="inputNome">Telefone do protocolo</label>
+                </span>
+            </div>
+
+            <div class="p-py-3">
+                <p-dropdown [(ngModel)]="campus.responsavel.id" optionLabel="matricula" optionValue="id" filter="true" placeholder="Selecione um responsável" [options]="listaUsuarios" ngModel name="responsavel" required></p-dropdown>
+            </div>
+
+            <div class="p-col-5 p-mx-auto">
+                <button pButton type="submit" label="CADASTRAR" [disabled] = "formCadastroCampus.invalid" style="font-weight: bold; font-size: 20px;"></button>
+            </div>
+        </div>
+    </div>
+</form>

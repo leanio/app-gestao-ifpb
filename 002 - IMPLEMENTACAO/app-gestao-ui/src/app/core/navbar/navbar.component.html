@@ -1,0 +1,12 @@
+<nav class="navbar">
+    <p-sidebar class="p-fluid" [(visible)]="visibleSidebar1" [baseZIndex]="10000">
+        <div class="p-col-12">
+            <h1 style="font-weight:normal">Left Sidebar</h1>
+            <button pButton label="Cadastrar" ></button>
+        </div>
+    </p-sidebar>
+
+    <a href="javascript:;" class="navbar-toggle" (click)="visibleSidebar1 = true">
+        <i class="pi pi-bars"></i>
+    </a>
+</nav>

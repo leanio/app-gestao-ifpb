@@ -1,0 +1,23 @@
+.navbar {
+    padding: 10px 0;
+    background-color: #1e94d2;
+  }
+
+.navbar-toggle {
+  color: #fff;
+  padding-left: 10px;
+}
+
+.p-button {
+  background-color: Transparent;
+  color: #404C51;
+  border-color: transparent;
+  text-align: left;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.p-button:hover {
+  background-color: #b9b9b9;
+  border-color: transparent;
+  color: #404C51;
+}
