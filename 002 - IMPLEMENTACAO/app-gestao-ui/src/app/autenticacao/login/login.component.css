@@ -18,7 +18,9 @@ body {
 .inscrever:not([disabled]):hover {
   background-color: #006842;
 }
-
+.esqueceu-senha {
+  cursor: pointer;
+}
 
 
 

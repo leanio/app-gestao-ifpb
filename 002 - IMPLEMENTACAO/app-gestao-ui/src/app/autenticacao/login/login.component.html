@@ -33,7 +33,7 @@
           </span>
 
         <div>
-          <h5>Esqueceu a senha?</h5>
+          <h5 class="esqueceu-senha" (click)="abrirModalEsqueceuSenha()">Esqueceu a senha?</h5>
         </div>
 
         <div>
@@ -50,3 +50,23 @@
     </div>
   </div>
 </div>
+
+<form autocomplete="off" #formularioEsqueceuSenha="ngForm">
+  <p-dialog header="Esqueceu sua senha de acesso?" [(visible)]="modalEsqueceuSenha" [modal]="true" [style]="{width: '400px'}" [baseZIndex]="10000"
+      [draggable]="false" [resizable]="false">
+        <p class="p-m-0">Nós a reenviaremos para seu e-mail</p>
+
+        <div class="p-grid p-jc-center p-ai-center ">
+          <span class="p-input-icon-left" style="width: 80%; margin-top: 50px;">
+            <i class="pi pi-envelope"></i>
+            <input [(ngModel)]="emailRecoverPassword.to" id="inputEmailEsqueceuSenha" type="text" pInputText name="inputEmailEsqueceuSenha" ngModel required #inputEmail
+              placeholder="Digite seu e-mail" style="width: 100%;">
+          </span>
+    
+          <button class="ui-button-success" name="login" [disabled]="formularioEsqueceuSenha.invalid" style="width: 80%; margin-top: 20px;" pButton label="ENVIAR"
+            (click)="enviarSenha()"></button>
+
+        </div>
+        
+  </p-dialog>
+</form>

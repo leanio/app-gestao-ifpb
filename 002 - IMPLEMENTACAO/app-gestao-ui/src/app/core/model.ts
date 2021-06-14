@@ -92,3 +92,7 @@ export class FaqOutput {
     pergunta: string;
     resposta: string;
 }
+
+export class EmailRecoverPassword {
+    to: string;
+}

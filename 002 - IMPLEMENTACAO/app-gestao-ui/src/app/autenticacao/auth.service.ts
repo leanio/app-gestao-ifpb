@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { JwtHelperService } from '@auth0/angular-jwt';
 
 import { environment } from '../../environments/environment.prod'
+import { EmailRecoverPassword } from '../core/model';
 
 @Injectable({
   providedIn: 'root'
@@ -35,6 +36,12 @@ export class AuthService {
     }
   }
 
+  async enviarSenha(emailRecoverPassword: EmailRecoverPassword): Promise<any> {
+    const headers = new HttpHeaders({'Content-Type': 'application/json'});
+
+    return this.httpClient.post(environment.apiUrl + '/email/recover-password', JSON.stringify(emailRecoverPassword), {headers}).toPromise().then();
+  }
+
   armazenarToken(token: any) {
     this.jwtPayload = this.helper.decodeToken(token);
     localStorage.setItem('access_token', token);
@@ -46,12 +53,6 @@ export class AuthService {
     if (token) {
       this.armazenarToken(token);
     }
-  }
-
-  async teste() {
-    this.httpClient.get('http://localhost:8080/bombeiros').toPromise<any>().then(response => {
-      console.log(response);
-    });
   }
   
 }

@@ -7,6 +7,7 @@ import { FormsModule } from '@angular/forms';
 
 import {ButtonModule} from 'primeng/button';
 import {InputTextModule} from 'primeng/inputtext';
+import {DialogModule} from 'primeng/dialog';
 
 import { JwtModule } from '@auth0/angular-jwt';
 
@@ -24,6 +25,7 @@ export function tokenGetter() {
 
     ButtonModule,
     InputTextModule,
+    DialogModule,
 
     AutenticacaoRoutingModule,
 
@@ -31,7 +33,7 @@ export function tokenGetter() {
       config: {
         tokenGetter: tokenGetter,
         allowedDomains: [environment.apiDominio],
-        disallowedRoutes: [environment.apiUrl + '/oauth/token', 'http://localhost:8080/bombeiros'],
+        disallowedRoutes: [environment.apiUrl + '/oauth/token', environment.apiUrl + '/email/recover-password'],
       },
     }),
   ],
