@@ -1,3 +1,4 @@
+import { HomeModule } from './home/home.module';
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
@@ -12,9 +13,11 @@ import { ProcessosModule } from './processos/processos.module';
 import { RegulamentosModule } from './regulamentos/regulamentos.module';
 import { UsuariosModule } from './usuarios/usuarios.module';
 
+
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -27,6 +30,7 @@ import { UsuariosModule } from './usuarios/usuarios.module';
     RegulamentosModule,
     ProcessosModule,
     CampusModule,
+    HomeModule,
 
     AppRoutingModule
   ],
