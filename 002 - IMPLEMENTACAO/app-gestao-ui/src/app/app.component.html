@@ -1,2 +1,47 @@
-<p-toast position="top-right"></p-toast>
-<router-outlet></router-outlet>
+<p-toast id="mensagemToast" position="top-right"></p-toast>
+
+<div *ngIf="!authService.isAutenticado()">
+    <router-outlet></router-outlet>
+</div>
+<div *ngIf="authService.isAutenticado()">
+
+    <div class="p-grid p-jc-center " style="min-height: 100vh;">
+        <div class="p-card p-grid p-jc-between " style="background-color: #00663B; height: 70px; width: 100%;">
+    
+        <div class="p-col-4 " style="height: 70px;">
+            <div class="p-grid p-flex-column  p-jc-center  " style="margin-top: 15px; margin-left: 25px;">
+            <div class="p-col" style="padding: 0px;">
+                <H6 class="p-text-bold" style="color: white; font-size: 12px; margin: 0px;">{{authService.jwtPayload.nome}}</H6>
+            </div>
+            <div class="p-col" style="padding: 0px;">
+                <H6 class="p-text-bold" style="color: white; font-size: 12px; margin: 0px;">Campus - Monteiro</H6>
+            </div>
+            </div>
+        </div>
+    
+        <div class="p-col-4" style="text-align: center; height: 70px">
+            <H1 class="p-text-bold" style="color: white;">PROCESS MANAGER</H1>
+        </div>
+    
+        <div class="p-col-4 p-grid p-jc-end" style="text-align: right; height: 70px; padding-right: 30px;">
+            <div class="p-grid p-jc-center p-ai-center" style="padding-top: 25px; width: 500px; ">
+            <div class="p-col-10">
+                <H6 id="h6Email" class="p-text-bold" style="color: white; font-size: 12px;">{{authService.jwtPayload.email}}</H6>
+            </div>
+            <div class="p-col-1 ">
+                <i class="pi pi-bell" style="color: white;"></i>
+            </div>
+            <div class="p-col-1 ">
+                <i class="pi pi-sign-out" (click)="logout()" style="color: white; cursor: pointer;"></i>
+            </div>
+            </div>
+        </div>
+    
+        </div>
+    
+        <div class="p-shadow-10" style="background-color: #00663B; width: 90%; min-height: 70vh; border-radius: 25px; margin-bottom: 3%;">
+            <router-outlet></router-outlet>
+        </div>
+    </div>
+    
+</div>

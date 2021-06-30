@@ -3,6 +3,7 @@ import { ErrorHandlerService } from 'src/app/core/error-handler.service';
 import { AuthService } from '../auth.service';
 import { ViewEncapsulation} from '@angular/core';
 import { EmailRecoverPassword } from 'src/app/core/model';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -19,15 +20,18 @@ export class LoginComponent implements OnInit {
 
   constructor(
     public authService: AuthService,
-    private errorHandlerService: ErrorHandlerService
-  ) { }
+    private errorHandlerService: ErrorHandlerService,
+    private router: Router
+  ) { 
+    this.verificarAutenticacao(); 
+  }
 
   ngOnInit(): void {
   }
 
   login(email: string, senha: string): void {
     this.authService.autenticar(email, senha).then(() => {
-
+      this.verificarAutenticacao();
     }).catch(erro => this.errorHandlerService.handle(erro));
   }
 
@@ -39,6 +43,16 @@ export class LoginComponent implements OnInit {
 
   abrirModalEsqueceuSenha(): void {
     this.modalEsqueceuSenha = true;
+  }
+
+  navegarParaHome(): void {
+    this.router.navigateByUrl('/home');
+  }
+
+  verificarAutenticacao(): void {
+    if (this.authService.isAutenticado()) {
+      this.navegarParaHome();
+    }
   }
 
 }

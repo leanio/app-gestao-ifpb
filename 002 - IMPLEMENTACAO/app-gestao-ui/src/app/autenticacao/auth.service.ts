@@ -17,7 +17,7 @@ export class AuthService {
   constructor(
     private httpClient: HttpClient
   ) { 
-    this.carregarToken();
+    this.carregarPayloadToken();
   }
 
   async autenticar(email: string, senha:String) {
@@ -31,6 +31,7 @@ export class AuthService {
     try {
       const response = await this.httpClient.post(this.authTokenUrl, body, { headers, withCredentials: true }).toPromise<any>();
       this.armazenarToken(response.access_token);
+      this.carregarPayloadToken();
     } catch (responseError) {
       return await Promise.reject(responseError);
     }
@@ -42,17 +43,28 @@ export class AuthService {
     return this.httpClient.post(environment.apiUrl + '/email/recover-password', JSON.stringify(emailRecoverPassword), {headers}).toPromise().then();
   }
 
-  armazenarToken(token: any) {
-    this.jwtPayload = this.helper.decodeToken(token);
+  armazenarToken(token: any): void {
     localStorage.setItem('access_token', token);
   }
 
-  carregarToken() {
-    const token = localStorage.getItem('access_token');
+  pegarToken(): any {
+    return localStorage.getItem('access_token');
+  }
+
+  carregarPayloadToken(): void {
+    const token = this.pegarToken();
 
     if (token) {
-      this.armazenarToken(token);
+      this.jwtPayload = this.helper.decodeToken(token);
     }
+  }
+
+  logout(): void {
+    localStorage.removeItem('access_token');
+  }
+
+  isAutenticado(): boolean {
+    return !this.helper.isTokenExpired(this.pegarToken());
   }
   
 }

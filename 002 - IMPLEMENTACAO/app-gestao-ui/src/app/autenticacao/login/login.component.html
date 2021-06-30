@@ -33,7 +33,7 @@
           </span>
 
         <div>
-          <h5 class="esqueceu-senha" (click)="abrirModalEsqueceuSenha()">Esqueceu a senha?</h5>
+          <h5 id="h5EsqueceuSenha" class="esqueceu-senha" (click)="abrirModalEsqueceuSenha()">Esqueceu a senha?</h5>
         </div>
 
         <div>
@@ -63,7 +63,7 @@
               placeholder="Digite seu e-mail" style="width: 100%;">
           </span>
     
-          <button class="ui-button-success" name="login" [disabled]="formularioEsqueceuSenha.invalid" style="width: 80%; margin-top: 20px;" pButton label="ENVIAR"
+          <button class="ui-button-success" name="enviar" [disabled]="formularioEsqueceuSenha.invalid" style="width: 80%; margin-top: 20px;" pButton label="ENVIAR"
             (click)="enviarSenha()"></button>
 
         </div>

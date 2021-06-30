@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from './autenticacao/auth.service';
 
 @Component({
@@ -9,16 +10,30 @@ import { AuthService } from './autenticacao/auth.service';
 export class AppComponent implements OnInit {
   title = 'app-gestao-ui';
 
-  campusId: number;
-
   constructor(
-    private autenticacaoService: AuthService
-  ) {
-
+    public authService: AuthService,
+    private router: Router
+  ) { 
+    this.verificarAutenticacao(); 
   }
+  
   ngOnInit(): void {
-    this.campusId = this.autenticacaoService.jwtPayload.campus_id;
+
   }
 
+  logout(): void {
+    this.authService.logout();
+    this.verificarAutenticacao();
+  }
+
+  navegarParaLogin(): void {
+    this.router.navigateByUrl('/login');
+  }
+
+  verificarAutenticacao(): void {
+    if (!this.authService.isAutenticado()) {
+      this.navegarParaLogin();
+    }
+  }
 
 }
