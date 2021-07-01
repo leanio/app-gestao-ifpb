@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ErrorHandlerService } from 'src/app/core/error-handler.service';
 import { ProcessoOutputBuscar } from 'src/app/core/model';
 import { ProcessoService } from '../processo.service';
 
@@ -12,13 +13,15 @@ export class ProcessoPesquisaComponent implements OnInit {
 
   processo = new ProcessoOutputBuscar();
 
+  regulamento: any;
+
   codigoCampus: number;
   codigoProcesso: number;
 
   constructor(
     private processoService: ProcessoService,
-    private route: ActivatedRoute,
-    private router: Router
+    private errorHandlerService: ErrorHandlerService,
+    private route: ActivatedRoute
   ) { }
 
   ngOnInit(): void {
@@ -31,11 +34,25 @@ export class ProcessoPesquisaComponent implements OnInit {
   buscar(): void {
     this.processoService.buscar(this.codigoCampus, this.codigoProcesso).then(dados => {
       this.processo = dados;
-    })
+    });
   }
 
   abrirArquivo(url: string) {
     window.open(url, '_blank');
+  }
+
+  onFileSelect(event) {
+    if (event.target.files.length > 0) {
+      this.regulamento = event.target.files[0];
+    }
+  }
+
+  onSubmit() {
+    this.processoService.subirRegulamentoPdf(this.regulamento, this.codigoCampus, this.codigoProcesso).then(() => {
+      this.buscar();
+    }).catch(e => {
+      this.errorHandlerService.handle(e);
+    })
   }
 
 }

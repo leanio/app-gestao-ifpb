@@ -27,4 +27,13 @@ export class ProcessoService {
   async listar(codigoCampus: number): Promise<ProcessoOutputListar[]> {
     return this.httpClient.get<ProcessoOutputListar[]>(this.url + `/${codigoCampus}/processos`).toPromise();
   }
+
+  async subirRegulamentoPdf(arquivo: any, codigoCampus: number, codigoProcesso: number): Promise<any> {
+    const formData = new FormData();
+    formData.append('arquivo', arquivo);
+    formData.append('nomeArquivo', arquivo.name);
+    formData.append('contentType', 'multipart/form-data');
+
+    return this.httpClient.post(this.url + `/${codigoCampus}/processos/${codigoProcesso}/regulamentos`, formData).toPromise();
+  }
 }

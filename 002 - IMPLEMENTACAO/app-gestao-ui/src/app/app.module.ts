@@ -10,7 +10,6 @@ import { AutenticacaoModule } from './autenticacao/autenticacao.module';
 import { CampusModule } from './campus/campus.module';
 import { CoreModule } from './core/core.module';
 import { ProcessosModule } from './processos/processos.module';
-import { RegulamentosModule } from './regulamentos/regulamentos.module';
 import { UsuariosModule } from './usuarios/usuarios.module';
 
 
@@ -27,7 +26,6 @@ import { UsuariosModule } from './usuarios/usuarios.module';
     CoreModule,
     AutenticacaoModule,
     UsuariosModule,
-    RegulamentosModule,
     ProcessosModule,
     CampusModule,
     HomeModule,

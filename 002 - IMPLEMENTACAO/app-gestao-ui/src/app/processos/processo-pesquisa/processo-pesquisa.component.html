@@ -118,12 +118,17 @@
                 </tr>
             </ng-template>
         </p-table>
+        
+        <div>
+            <form #formRegulamento="ngForm" (ngSubmit)="onSubmit()">      
+            <div>
+                <input type="file" style="background-color: red;" name="regulamentopdf" (change)="onFileSelect($event)" />
+            </div>
+            <div>
+                <button style="background-color: blue;" type="submit">Upload</button>
+            </div>
+            </form>
+        </div>
+        
     </p-tabPanel>
 </p-tabView>
-
-<div>
-    <div>
-        {{processo.id}}
-        {{processo.nome}}
-    </div>
-</div>
