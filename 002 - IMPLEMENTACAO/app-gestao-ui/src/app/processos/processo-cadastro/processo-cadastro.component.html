@@ -1,18 +1,20 @@
 <form #formCadastroProcesso="ngForm" (ngSubmit)="adicionar()">
-    <div class="p-shadow-22 p-col-11 p-p-4 p-mx-auto">
+    <div class="p-shadow-10 p-col-11 p-p-4 p-mx-auto" style="background-color: white; border-radius: 25px; margin-top: 75px;">
     <div class="p-fluid p-col-10 p-mx-auto">
-        <div class="p-text-center">
-            <h1>CADASTRO DE PROCESSO</h1> 
+        <div class="p-text-center" style="margin-top: 30px;">
+            <h1 >CADASTRO DE PROCESSO</h1>
         </div>
-        <div class="p-py-3">
+        <div class="p-py-3" style="margin-top: 50px;">
             <span class="p-float-label">
                 <input [(ngModel)]="processo.nome" pInputText type="text" name="inputNome" ngModel #inputNome="ngModel" minlength="5" required>
                 <label for="inputNome">Nome</label>
             </span>
         </div>
-        <div class="p-col-5 p-mx-auto">
-            <button pButton type="submit" label="CADASTRAR" [disabled] = "formCadastroProcesso.invalid" style="font-weight: bold; font-size: 20px;"></button>
+        <div class="p-col-5 p-mx-auto" style="margin-top: 40px; margin-bottom: 40px;">
+            <button class="ui-button-success" pButton type="submit" label="CADASTRAR" [disabled] = "formCadastroProcesso.invalid" style="font-weight: bold; font-size: 20px;"></button>
+
         </div>
+
     </div>
     </div>
 </form>
