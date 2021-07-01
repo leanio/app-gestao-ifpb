@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { MessageService } from 'primeng/api';
 import { ErrorHandlerService } from 'src/app/core/error-handler.service';
 import { ProcessoOutputBuscar } from 'src/app/core/model';
 import { ProcessoService } from '../processo.service';
@@ -19,7 +20,8 @@ export class ProcessoPesquisaComponent implements OnInit {
   constructor(
     private processoService: ProcessoService,
     private errorHandlerService: ErrorHandlerService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private messageService: MessageService
   ) { }
 
   ngOnInit(): void {
@@ -38,6 +40,7 @@ export class ProcessoPesquisaComponent implements OnInit {
   remover(codigoRegulamento: number): void {
     this.processoService.removerRegulamento(this.codigoCampus, this.codigoProcesso, codigoRegulamento).then(dados => {
       this.buscar();
+      this.messageService.add({severity: 'success', summary: 'Sucesso', detail: 'Regulamento removido'});
     })
   }
 
@@ -54,6 +57,7 @@ export class ProcessoPesquisaComponent implements OnInit {
 
     this.processoService.subirRegulamentoPdf(regulamento, this.codigoCampus, this.codigoProcesso).then(() => {
       this.buscar();
+      this.messageService.add({severity: 'success', summary: 'Sucesso', detail: 'Regulamento salvo'});
     }).catch(e => {
       this.errorHandlerService.handle(e);
     });

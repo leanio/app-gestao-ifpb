@@ -9,6 +9,8 @@ import { AuthService } from '../autenticacao/auth.service';
 })
 export class HomeComponent implements OnInit {
 
+  codigoCampus = 1;
+
   constructor(
     public authService: AuthService
   ) { 
