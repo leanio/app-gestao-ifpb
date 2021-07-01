@@ -1,3 +1,5 @@
+<div style="margin-top: 30px; background-color: rgb(255, 255, 255); border-radius: 25px; margin-left: 30px; margin-right: 30px; min-height: 60vh;">
+<div style="padding-bottom: 20px; padding-top: 30px;">
 <p-tabView>
     <p-tabPanel header="FAQs">
         <div>
@@ -14,7 +16,7 @@
         <div>
             <h1>Anexos</h1>
         </div>
-        <p-table [value]="processo.anexos" [paginator]="true" [rows]="20">
+        <p-table [value]="processo.anexos" [paginator]="true" [rows]="5">
             <ng-template pTemplate="header">
                 <tr>
                     <th>ID
@@ -32,7 +34,7 @@
                     <th>PDF
                         <p-columnFilter type="text" field="nome" display="menu"></p-columnFilter>
                     </th>
-                    
+
                 </tr>
             </ng-template>
             <ng-template pTemplate="body" let-anexo>
@@ -50,7 +52,7 @@
         <div>
             <h1>Guias</h1>
         </div>
-        <p-table [value]="processo.guias" [paginator]="true" [rows]="20">
+        <p-table [value]="processo.guias" [paginator]="true" [rows]="5">
             <ng-template pTemplate="header">
                 <tr>
                     <th>ID
@@ -68,7 +70,7 @@
                     <th>PDF
                         <p-columnFilter type="text" field="nome" display="menu"></p-columnFilter>
                     </th>
-                    
+
                 </tr>
             </ng-template>
             <ng-template pTemplate="body" let-guia>
@@ -81,13 +83,13 @@
                 </tr>
             </ng-template>
         </p-table>
-        
+
     </p-tabPanel>
     <p-tabPanel header="Regulamentos">
         <div>
             <h1>Regulamentos</h1>
         </div>
-        <p-table [value]="processo.regulamentos" [paginator]="true" [rows]="20">
+        <p-table [value]="processo.regulamentos" [paginator]="true" [rows]="5">
             <ng-template pTemplate="header">
                 <tr>
                     <th>ID
@@ -102,10 +104,10 @@
                     <th>NOME DO PDF
                         <p-columnFilter type="text" field="nome" display="menu"></p-columnFilter>
                     </th>
-                    <th>URL
-                        <p-columnFilter type="text" field="nome" display="menu"></p-columnFilter>
+                    <th>
+
                     </th>
-                    
+
                 </tr>
             </ng-template>
             <ng-template pTemplate="body" let-regulamento>
@@ -114,16 +116,24 @@
                     <td>{{regulamento.documento.id}}</td>
                     <td>{{regulamento.documento.contentType}}</td>
                     <td>{{regulamento.documento.nomeArquivo}}</td>
-                    <td><button pButton (click)="abrirArquivo(regulamento.documento.url)" label="Abrir"></button></td>
+                    <!-- <td><button pButton (click)="abrirArquivo(regulamento.documento.url)" label="Abrir"></button></td> -->
+                    <td><i class="pi pi-search" (click)="abrirArquivo(regulamento.documento.url)" style="font-size: 1.5rem; margin-left: 60px;"></i>
+                      <i class="pi pi-trash" (click)="remover(regulamento.id)" style="font-size: 1.5rem; margin-left: 60px;"></i></td>
+
                 </tr>
             </ng-template>
         </p-table>
-        
-        <div>  
-            <div>
-                <p-fileUpload name="myfile[]" mode="basic" customUpload="true" (uploadHandler)="subirRegulamentoPdf($event)"></p-fileUpload>
-            </div>
+
+        <div class="p-grid" style="margin-left: 20px; margin-top: 20px;">
+          <div>
+            <p-fileUpload name="myfile[]" mode="basic" customUpload="true" (uploadHandler)="subirRegulamentoPdf($event)"></p-fileUpload>
+          </div>
+          <div style="margin-left: 20px;">
+            <h6>Adicionar Novo Regulamento</h6>
+          </div>
         </div>
-        
+
     </p-tabPanel>
 </p-tabView>
+</div>
+</div>

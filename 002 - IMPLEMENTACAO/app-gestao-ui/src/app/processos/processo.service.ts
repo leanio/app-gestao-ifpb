@@ -9,7 +9,7 @@ import { ProcessoInput, ProcessoOutputBuscar, ProcessoOutputListar } from '../co
 })
 export class ProcessoService {
   url = environment.apiUrl + '/campus';
- 
+
   constructor(
     private httpClient: HttpClient
   ) { }
@@ -26,6 +26,10 @@ export class ProcessoService {
 
   async listar(codigoCampus: number): Promise<ProcessoOutputListar[]> {
     return this.httpClient.get<ProcessoOutputListar[]>(this.url + `/${codigoCampus}/processos`).toPromise();
+  }
+
+  async removerRegulamento(codigoCampus: number, codigoProcesso: number, codigoRegulamento: number): Promise<any> {
+    return this.httpClient.delete<any>(this.url + `/${codigoCampus}/processos/${codigoProcesso}/regulamentos/${codigoRegulamento}`).toPromise();
   }
 
   async subirRegulamentoPdf(arquivo: any, codigoCampus: number, codigoProcesso: number): Promise<any> {

@@ -35,6 +35,12 @@ export class ProcessoPesquisaComponent implements OnInit {
     });
   }
 
+  remover(codigoRegulamento: number): void {
+    this.processoService.removerRegulamento(this.codigoCampus, this.codigoProcesso, codigoRegulamento).then(dados => {
+      this.buscar();
+    })
+  }
+
   abrirArquivo(url: string) {
     window.open(url, '_blank');
   }
