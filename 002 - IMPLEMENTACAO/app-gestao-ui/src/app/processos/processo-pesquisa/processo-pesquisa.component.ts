@@ -13,8 +13,6 @@ export class ProcessoPesquisaComponent implements OnInit {
 
   processo = new ProcessoOutputBuscar();
 
-  regulamento: any;
-
   codigoCampus: number;
   codigoProcesso: number;
 
@@ -41,18 +39,19 @@ export class ProcessoPesquisaComponent implements OnInit {
     window.open(url, '_blank');
   }
 
-  onFileSelect(event) {
-    if (event.target.files.length > 0) {
-      this.regulamento = event.target.files[0];
-    }
-  }
+  subirRegulamentoPdf(event) {
+    let regulamento: any;
 
-  onSubmit() {
-    this.processoService.subirRegulamentoPdf(this.regulamento, this.codigoCampus, this.codigoProcesso).then(() => {
+    for(let file of event.files) {
+      regulamento = file;
+    }
+
+    this.processoService.subirRegulamentoPdf(regulamento, this.codigoCampus, this.codigoProcesso).then(() => {
       this.buscar();
     }).catch(e => {
       this.errorHandlerService.handle(e);
-    })
+    });
+
   }
 
 }

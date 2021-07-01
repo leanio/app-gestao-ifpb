@@ -119,15 +119,10 @@
             </ng-template>
         </p-table>
         
-        <div>
-            <form #formRegulamento="ngForm" (ngSubmit)="onSubmit()">      
+        <div>  
             <div>
-                <input type="file" style="background-color: red;" name="regulamentopdf" (change)="onFileSelect($event)" />
+                <p-fileUpload name="myfile[]" mode="basic" customUpload="true" (uploadHandler)="subirRegulamentoPdf($event)"></p-fileUpload>
             </div>
-            <div>
-                <button style="background-color: blue;" type="submit">Upload</button>
-            </div>
-            </form>
         </div>
         
     </p-tabPanel>
