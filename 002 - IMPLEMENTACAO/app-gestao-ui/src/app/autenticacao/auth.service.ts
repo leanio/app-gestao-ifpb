@@ -37,7 +37,7 @@ export class AuthService {
     }
   }
 
-  async enviarSenha(emailRecoverPassword: EmailRecoverPassword): Promise<any> {
+  async enviarCodigoRecuperacaoSenha(emailRecoverPassword: EmailRecoverPassword): Promise<any> {
     const headers = new HttpHeaders({'Content-Type': 'application/json'});
 
     return this.httpClient.post(environment.apiUrl + '/email/recover-password', JSON.stringify(emailRecoverPassword), {headers}).toPromise().then();

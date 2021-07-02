@@ -56,17 +56,34 @@
       [draggable]="false" [resizable]="false">
         <p class="p-m-0">Nós a reenviaremos para seu e-mail</p>
 
-        <div class="p-grid p-jc-center p-ai-center ">
-          <span class="p-input-icon-left" style="width: 80%; margin-top: 50px;">
-            <i class="pi pi-envelope"></i>
-            <input [(ngModel)]="emailRecoverPassword.to" id="inputEmailEsqueceuSenha" type="text" pInputText name="inputEmailEsqueceuSenha" ngModel required #inputEmail
-              placeholder="Digite seu e-mail" style="width: 100%;">
-          </span>
-    
-          <button class="ui-button-success" name="enviar" [disabled]="formularioEsqueceuSenha.invalid" style="width: 80%; margin-top: 20px;" pButton label="ENVIAR"
-            (click)="enviarSenha()"></button>
-
-        </div>
         
+          <div class="p-grid p-jc-center p-ai-center" *ngIf="!codigoRecuperadaoSenha">
+            <span class="p-input-icon-left" style="width: 80%; margin-top: 50px;">
+              <i class="pi pi-envelope"></i>
+              <input [(ngModel)]="emailRecoverPassword.to" id="inputEmailEsqueceuSenha" type="text" pInputText name="inputEmailEsqueceuSenha" ngModel required #inputEmail
+                placeholder="Digite seu e-mail" style="width: 100%;">
+            </span>
+            <button class="ui-button-success" name="enviar" [disabled]="formularioEsqueceuSenha.invalid" style="width: 80%; margin-top: 20px;" pButton label="ENVIAR"
+              (click)="enviarCodigoRecuperacaoSenha()"></button>
+          </div>
+          
+          <div class="p-grid p-jc-center p-ai-center"  *ngIf="codigoRecuperadaoSenha && !supostoCodigoRecuperacaoSenhaConfere()">
+            <span class="p-input-icon-left" style="width: 80%; margin-top: 50px;">
+              <i class="pi pi-key"></i>
+              <input [(ngModel)]="supostoCodigoRecuperacaoSenha" id="inputSupostoCodigoRecuperacaoSenha" type="text" pInputText name="inputSupostoCodigoRecuperacaoSenha" ngModel required #inputSupostoCodigoRecuperacaoSenha
+                placeholder="Digite o código" style="width: 100%;">
+            </span> 
+          </div>
+
+          <div class="p-grid p-jc-center p-ai-center"  *ngIf="supostoCodigoRecuperacaoSenhaConfere()">
+            <span class="p-input-icon-left" style="width: 80%; margin-top: 50px;">
+              <i class="pi pi-key"></i>
+              <input type="password" [(ngModel)]="novaSenha" id="inputNovaSenha" pInputText name="inputNovaSenha" ngModel required #inputNovaSenha
+                placeholder="Digite sua nova senha" style="width: 100%;">
+            </span> 
+
+            <button class="ui-button-success" name="salvarNovaSenha" [disabled]="formularioEsqueceuSenha.invalid" style="width: 80%; margin-top: 20px;" pButton label="SALVAR"
+            (click)="salvarNovaSenha()"></button>
+          </div>
   </p-dialog>
 </form>

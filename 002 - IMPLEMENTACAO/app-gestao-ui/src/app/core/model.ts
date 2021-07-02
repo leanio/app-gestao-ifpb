@@ -96,3 +96,8 @@ export class FaqOutput {
 export class EmailRecoverPassword {
     to: string;
 }
+
+
+export class ModelNovaSenha {
+    novaSenha: number;
+}
