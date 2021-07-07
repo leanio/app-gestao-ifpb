@@ -9,7 +9,7 @@ import { AuthService } from '../autenticacao/auth.service';
 })
 export class HomeComponent implements OnInit {
 
-  codigoCampus = 1;
+  codigoCampus: number;
 
   constructor(
     public authService: AuthService
@@ -18,7 +18,8 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
+    this.codigoCampus = this.authService.jwtPayload.campus_id;
+    
   }
 
 
