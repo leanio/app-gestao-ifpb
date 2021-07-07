@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AuthService } from 'src/app/autenticacao/auth.service';
+import { ErrorHandlerService } from 'src/app/core/error-handler.service';
 import { ProcessoOutputListar } from 'src/app/core/model';
 import { ProcessoService } from '../processo.service';
 
@@ -16,7 +18,9 @@ export class ProcessoListarComponent implements OnInit {
   constructor(
     private processoService: ProcessoService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    public authService: AuthService,
+    private errorHandlerService: ErrorHandlerService
   ) { }
 
   ngOnInit(): void {
@@ -27,7 +31,7 @@ export class ProcessoListarComponent implements OnInit {
   listar(): void {
     this.processoService.listar(this.codigoCampus).then(dados => {
       this.processos = dados;
-    })
+    }).catch(error => this.errorHandlerService.handle(error));
   }
 
   novoProcesso(): void {

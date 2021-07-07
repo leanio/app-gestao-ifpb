@@ -20,7 +20,7 @@
                 <td>{{product.id}}</td>
                 <td>{{product.nome}}</td>
                 <td>
-                    <a class="button" routerLink="/processos/pesquisa/1/{{product.id}}" mat-button>
+                    <a class="button" routerLink="/processos/pesquisa/{{authService.jwtPayload.campus_id}}/{{product.id}}" mat-button>
                         <i class="pi pi-info-circle" style="font-size: 1.5rem"></i>
                       </a>
                 </td>
@@ -29,7 +29,7 @@
     </p-table>
   </div>
   <div class="p-col p-as-end" style="margin-right: 30px; text-align: right; padding-bottom: 20px;">
-    <button class="ui-button-success" routerLink="/processos/cadastro/{{codigoCampus}}" pButton type="button" style="width: 200px; height: 50px; font-weight: bold; font-size: 20px;" label="NOVO PROCESSO" ></button>
+    <button id="botaoNovoProcesso" class="ui-button-success" routerLink="/processos/cadastro/{{codigoCampus}}" pButton type="button" style="width: 200px; height: 50px; font-weight: bold; font-size: 20px;" label="NOVO PROCESSO" ></button>
   </div>
 </div>
 

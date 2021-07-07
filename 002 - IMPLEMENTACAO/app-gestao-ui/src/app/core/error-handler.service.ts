@@ -28,10 +28,6 @@ export class ErrorHandlerService {
           detalhe = errorResponse.error.detail;
         }
 
-        if (errorResponse.error.title) {
-          sumario = errorResponse.error.title;
-        }
-
       } catch (e) {}
     }
     this.messageService.add({severity: 'error', summary: sumario, detail: detalhe});
