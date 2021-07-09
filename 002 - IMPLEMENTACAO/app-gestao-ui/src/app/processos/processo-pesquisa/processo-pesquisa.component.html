@@ -43,10 +43,21 @@
                     <td>{{anexo.documento.id}}</td>
                     <td>{{anexo.documento.contentType}}</td>
                     <td>{{anexo.documento.nomeArquivo}}</td>
-                    <td><button pButton (click)="abrirArquivo(anexo.documento.url)" label="Abrir"></button></td>
+                    <td><i class="pi pi-search" (click)="abrirArquivo(anexo.documento.url)" style="font-size: 1.5rem; margin-left: 60px;"></i>
+                        <i class="pi pi-trash" (click)="removerAnexo(anexo.id)" style="font-size: 1.5rem; margin-left: 60px;"></i></td>
                 </tr>
             </ng-template>
         </p-table>
+
+        <div class="p-grid" style="margin-left: 20px; margin-top: 20px;">
+            <div>
+              <p-fileUpload id="botaoSubirAnexoPdf" name="botaoSubirAnexoPdf" accept=".pdf" name="myfile[]" mode="basic" customUpload="true" (uploadHandler)="subirAnexoPdf($event)"></p-fileUpload>
+            </div>
+            <div style="margin-left: 20px;">
+              <h6>Adicionar Novo Anexo</h6>
+            </div>
+          </div>
+
     </p-tabPanel>
     <p-tabPanel header="Guias">
         <div>
@@ -118,7 +129,7 @@
                     <td>{{regulamento.documento.nomeArquivo}}</td>
                     <!-- <td><button pButton (click)="abrirArquivo(regulamento.documento.url)" label="Abrir"></button></td> -->
                     <td><i class="pi pi-search" (click)="abrirArquivo(regulamento.documento.url)" style="font-size: 1.5rem; margin-left: 60px;"></i>
-                      <i class="pi pi-trash" (click)="remover(regulamento.id)" style="font-size: 1.5rem; margin-left: 60px;"></i></td>
+                      <i class="pi pi-trash" (click)="removerRegulamento(regulamento.id)" style="font-size: 1.5rem; margin-left: 60px;"></i></td>
 
                 </tr>
             </ng-template>
@@ -126,7 +137,7 @@
 
         <div class="p-grid" style="margin-left: 20px; margin-top: 20px;">
           <div>
-            <p-fileUpload id="botaoSubirRegulamentoPdf" name="myfile[]" mode="basic" customUpload="true" (uploadHandler)="subirRegulamentoPdf($event)"></p-fileUpload>
+            <p-fileUpload id="botaoSubirRegulamentoPdf" name="botaoSubirRegulamentoPdf" accept=".pdf" name="myfile[]" mode="basic" customUpload="true" (uploadHandler)="subirRegulamentoPdf($event)"></p-fileUpload>
           </div>
           <div style="margin-left: 20px;">
             <h6>Adicionar Novo Regulamento</h6>

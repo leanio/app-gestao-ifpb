@@ -40,4 +40,18 @@ export class ProcessoService {
 
     return this.httpClient.post(this.url + `/${codigoCampus}/processos/${codigoProcesso}/regulamentos`, formData).toPromise();
   }
+
+  async removerAnexo(codigoCampus: number, codigoProcesso: number, codigoAnexo: number): Promise<any> {
+    return this.httpClient.delete<any>(this.url + `/${codigoCampus}/processos/${codigoProcesso}/anexos/${codigoAnexo}`).toPromise();
+  }
+
+  async subirAnexoPdf(arquivo: any, codigoCampus: number, codigoAnexo: number): Promise<any> {
+    const formData = new FormData();
+    formData.append('arquivo', arquivo);
+    formData.append('nomeArquivo', arquivo.name);
+    formData.append('contentType', 'multipart/form-data');
+
+    return this.httpClient.post(this.url + `/${codigoCampus}/processos/${codigoAnexo}/anexos`, formData).toPromise();
+  }
+
 }

@@ -37,7 +37,7 @@ export class ProcessoPesquisaComponent implements OnInit {
     });
   }
 
-  remover(codigoRegulamento: number): void {
+  removerRegulamento(codigoRegulamento: number): void {
     this.processoService.removerRegulamento(this.codigoCampus, this.codigoProcesso, codigoRegulamento).then(dados => {
       this.buscar();
       this.messageService.add({severity: 'success', summary: 'Sucesso', detail: 'Regulamento removido'});
@@ -49,15 +49,30 @@ export class ProcessoPesquisaComponent implements OnInit {
   }
 
   subirRegulamentoPdf(event) {
-    let regulamento: any;
-
-    for(let file of event.files) {
-      regulamento = file;
-    }
-
+    const regulamento = event.files.shift();
+    
     this.processoService.subirRegulamentoPdf(regulamento, this.codigoCampus, this.codigoProcesso).then(() => {
       this.buscar();
       this.messageService.add({severity: 'success', summary: 'Sucesso', detail: 'Regulamento salvo'});
+    }).catch(e => {
+      this.errorHandlerService.handle(e);
+    });
+
+  }
+
+  removerAnexo(codigoAnexo: number): void {
+    this.processoService.removerAnexo(this.codigoCampus, this.codigoProcesso, codigoAnexo).then(dados => {
+      this.buscar();
+      this.messageService.add({severity: 'success', summary: 'Sucesso', detail: 'Anexo removido'});
+    })
+  }
+
+  subirAnexoPdf(event) {
+    const anexo = event.files.shift()
+
+    this.processoService.subirAnexoPdf(anexo, this.codigoCampus, this.codigoProcesso).then(() => {
+      this.buscar();
+      this.messageService.add({severity: 'success', summary: 'Sucesso', detail: 'Anexo salvo'});
     }).catch(e => {
       this.errorHandlerService.handle(e);
     });
