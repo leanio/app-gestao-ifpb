@@ -41,6 +41,19 @@ export class ProcessoService {
     return this.httpClient.post(this.url + `/${codigoCampus}/processos/${codigoProcesso}/regulamentos`, formData).toPromise();
   }
 
+  async removerGuia(codigoCampus: number, codigoProcesso: number, codigoGuia: number): Promise<any> {
+    return this.httpClient.delete<any>(this.url + `/${codigoCampus}/processos/${codigoProcesso}/guias/${codigoGuia}`).toPromise();
+  }
+
+  async subirGuiaPdf(arquivo: any, codigoCampus: number, codigoGuia: number): Promise<any> {
+    const formData = new FormData();
+    formData.append('arquivo', arquivo);
+    formData.append('nomeArquivo', arquivo.name);
+    formData.append('contentType', 'multipart/form-data');
+
+    return this.httpClient.post(this.url + `/${codigoCampus}/processos/${codigoGuia}/guias`, formData).toPromise();
+  }
+
   async removerAnexo(codigoCampus: number, codigoProcesso: number, codigoAnexo: number): Promise<any> {
     return this.httpClient.delete<any>(this.url + `/${codigoCampus}/processos/${codigoProcesso}/anexos/${codigoAnexo}`).toPromise();
   }

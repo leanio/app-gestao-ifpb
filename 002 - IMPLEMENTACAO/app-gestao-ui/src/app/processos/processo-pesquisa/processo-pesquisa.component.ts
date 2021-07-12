@@ -50,10 +50,29 @@ export class ProcessoPesquisaComponent implements OnInit {
 
   subirRegulamentoPdf(event) {
     const regulamento = event.files.shift();
-    
+
     this.processoService.subirRegulamentoPdf(regulamento, this.codigoCampus, this.codigoProcesso).then(() => {
       this.buscar();
       this.messageService.add({severity: 'success', summary: 'Sucesso', detail: 'Regulamento salvo'});
+    }).catch(e => {
+      this.errorHandlerService.handle(e);
+    });
+
+  }
+
+  removerGuia(codigoGuia: number): void {
+    this.processoService.removerGuia(this.codigoCampus, this.codigoProcesso, codigoGuia).then(dados => {
+      this.buscar();
+      this.messageService.add({severity: 'success', summary: 'Sucesso', detail: 'Guia removido'});
+    })
+  }
+
+  subirGuiaPdf(event) {
+    const guia = event.files.shift()
+
+    this.processoService.subirGuiaPdf(guia, this.codigoCampus, this.codigoProcesso).then(() => {
+      this.buscar();
+      this.messageService.add({severity: 'success', summary: 'Sucesso', detail: 'Guia salva'});
     }).catch(e => {
       this.errorHandlerService.handle(e);
     });
