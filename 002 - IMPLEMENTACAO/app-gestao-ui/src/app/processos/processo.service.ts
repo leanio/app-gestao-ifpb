@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 import { environment } from '../../environments/environment.prod'
-import { ProcessoInput, ProcessoOutputBuscar, ProcessoOutputListar } from '../core/model';
+import { FaqOutput, FaqPerguntaInput, FaqRespostaInput, ProcessoInput, ProcessoOutputBuscar, ProcessoOutputListar } from '../core/model';
 
 @Injectable({
   providedIn: 'root'
@@ -30,6 +30,36 @@ export class ProcessoService {
 
   async removerRegulamento(codigoCampus: number, codigoProcesso: number, codigoRegulamento: number): Promise<any> {
     return this.httpClient.delete<any>(this.url + `/${codigoCampus}/processos/${codigoProcesso}/regulamentos/${codigoRegulamento}`).toPromise();
+  }
+
+  async perguntar(codigoCampus: number, codigoProcesso: number, faqPergunta: FaqPerguntaInput): Promise<FaqOutput> {
+    const headers = new HttpHeaders({'Content-Type': 'application/json'});
+
+    return this.httpClient.post(this.url + `/${codigoCampus}/processos/${codigoProcesso}/faqs`, JSON.stringify(faqPergunta), {headers}).toPromise().then();
+  }
+
+  async responder(codigoCampus: number, codigoProcesso: number, codigoFaq: number, faqResposta: FaqRespostaInput): Promise<FaqOutput> {
+    const headers = new HttpHeaders({'Content-Type': 'application/json'});
+
+    return this.httpClient.put(this.url + `/${codigoCampus}/processos/${codigoProcesso}/faqs/${codigoFaq}`, JSON.stringify(faqResposta), {headers}).toPromise().then();
+  }
+
+  async ativarFaq(codigoCampus: number, codigoProcesso: number, codigoFaq: number): Promise<any> {
+    const headers = new HttpHeaders({'Content-Type': 'application/json'});
+
+    return this.httpClient.put(this.url + `/${codigoCampus}/processos/${codigoProcesso}/faqs/${codigoFaq}/ativar`, {headers}).toPromise().then();
+  }
+
+  async inativarFaq(codigoCampus: number, codigoProcesso: number, codigoFaq: number): Promise<any> {
+    const headers = new HttpHeaders({'Content-Type': 'application/json'});
+
+    return this.httpClient.delete(this.url + `/${codigoCampus}/processos/${codigoProcesso}/faqs/${codigoFaq}/inativar`, {headers}).toPromise().then();
+  }
+
+  async removerFaq(codigoCampus: number, codigoProcesso: number, codigoFaq: number): Promise<any> {
+    const headers = new HttpHeaders({'Content-Type': 'application/json'});
+
+    return this.httpClient.delete(this.url + `/${codigoCampus}/processos/${codigoProcesso}/faqs/${codigoFaq}`, {headers}).toPromise().then();
   }
 
   async subirRegulamentoPdf(arquivo: any, codigoCampus: number, codigoProcesso: number): Promise<any> {

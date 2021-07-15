@@ -93,10 +93,17 @@ export class FaqOutput {
     resposta: string;
 }
 
+export class FaqPerguntaInput {
+    pergunta: string;
+}
+
+export class FaqRespostaInput {
+    resposta: string;
+}
+
 export class EmailRecoverPassword {
     to: string;
 }
-
 
 export class ModelNovaSenha {
     novaSenha: number;

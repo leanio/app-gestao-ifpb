@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
+import { AuthService } from 'src/app/autenticacao/auth.service';
 import { ErrorHandlerService } from 'src/app/core/error-handler.service';
-import { ProcessoOutputBuscar } from 'src/app/core/model';
+import { FaqOutput, FaqPerguntaInput, FaqRespostaInput, ProcessoOutputBuscar } from 'src/app/core/model';
 import { ProcessoService } from '../processo.service';
 
 @Component({
@@ -17,11 +18,18 @@ export class ProcessoPesquisaComponent implements OnInit {
   codigoCampus: number;
   codigoProcesso: number;
 
+  respondendoCodigoFaq: number;
+  respostaFaq = new FaqRespostaInput();
+
+  modalPergunta: boolean;
+  perguntaFaq = new FaqPerguntaInput();
+
   constructor(
     private processoService: ProcessoService,
     private errorHandlerService: ErrorHandlerService,
     private route: ActivatedRoute,
-    private messageService: MessageService
+    private messageService: MessageService,
+    public authService: AuthService
   ) { }
 
   ngOnInit(): void {
@@ -64,7 +72,9 @@ export class ProcessoPesquisaComponent implements OnInit {
     this.processoService.removerGuia(this.codigoCampus, this.codigoProcesso, codigoGuia).then(dados => {
       this.buscar();
       this.messageService.add({severity: 'success', summary: 'Sucesso', detail: 'Guia removido'});
-    })
+    }).catch(e => {
+      this.errorHandlerService.handle(e);
+    });
   }
 
   subirGuiaPdf(event) {
@@ -83,10 +93,12 @@ export class ProcessoPesquisaComponent implements OnInit {
     this.processoService.removerAnexo(this.codigoCampus, this.codigoProcesso, codigoAnexo).then(dados => {
       this.buscar();
       this.messageService.add({severity: 'success', summary: 'Sucesso', detail: 'Anexo removido'});
-    })
+    }).catch(e => {
+      this.errorHandlerService.handle(e);
+    });
   }
 
-  subirAnexoPdf(event) {
+  subirAnexoPdf(event): void {
     const anexo = event.files.shift()
 
     this.processoService.subirAnexoPdf(anexo, this.codigoCampus, this.codigoProcesso).then(() => {
@@ -96,6 +108,76 @@ export class ProcessoPesquisaComponent implements OnInit {
       this.errorHandlerService.handle(e);
     });
 
+  }
+
+  ativarFaq(codigoFaq: number): void {
+    this.processoService.ativarFaq(this.codigoCampus, this.codigoProcesso, codigoFaq).then(() => {
+      this.buscar();
+      this.messageService.add({severity: 'success', summary: 'Sucesso', detail: 'Faq ativo'});
+    }).catch(e => {
+      this.errorHandlerService.handle(e);
+    });
+  }
+
+  inativarFaq(codigoFaq: number): void {
+    this.processoService.inativarFaq(this.codigoCampus, this.codigoProcesso, codigoFaq).then(() => {
+      this.buscar();
+      this.messageService.add({severity: 'success', summary: 'Sucesso', detail: 'Faq inativado'});
+    }).catch(e => {
+      this.errorHandlerService.handle(e);
+    });
+  }
+
+  removerFaq(codigoFaq: number): void {
+    this.processoService.removerFaq(this.codigoCampus, this.codigoProcesso, codigoFaq).then(() => {
+      this.buscar();
+      this.messageService.add({severity: 'success', summary: 'Sucesso', detail: 'Faq removido'});
+    }).catch(e => {
+      this.errorHandlerService.handle(e);
+    });
+  }
+
+  responder(): void {
+    this.processoService.responder(this.codigoCampus, this.codigoProcesso, this.respondendoCodigoFaq, this.respostaFaq).then(() => {
+      this.renovarRespondendoFaq();
+      this.buscar();
+      this.messageService.add({severity: 'success', summary: 'Sucesso', detail: 'Faq respondido'});
+    }).catch(e => {
+      this.errorHandlerService.handle(e);
+    });
+  }
+
+  perguntar(): void {
+    this.processoService.perguntar(this.codigoCampus, this.codigoProcesso, this.perguntaFaq).then(() => {
+      this.renovarPerguntaFaq();
+      this.buscar();
+      this.messageService.add({severity: 'success', summary: 'Sucesso', detail: 'Pergunta realizada com sucesso'});
+    }).catch(e => {
+      this.errorHandlerService.handle(e);
+    });
+  }
+
+  selecionarFaq(faq: FaqOutput) {
+    this.respondendoCodigoFaq = faq.id;
+    this.respostaFaq.resposta = faq.resposta;
+  }
+
+  isRespondendoFaq(codigoFaq: number): boolean {
+    return this.respondendoCodigoFaq === codigoFaq;
+  }
+
+  renovarRespondendoFaq(): void {
+    this.respostaFaq = new FaqRespostaInput();
+    this.respondendoCodigoFaq = undefined;
+  }
+
+  renovarPerguntaFaq(): void {
+    this.perguntaFaq = new FaqPerguntaInput();
+    this.modalPergunta = false;
+  }
+
+  abrirModalPergunta(): void {
+    this.modalPergunta = true;
   }
 
 }

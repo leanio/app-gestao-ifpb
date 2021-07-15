@@ -5,10 +5,25 @@
         <div>
             <h1>FAQs</h1>
         </div>
-        <div class="p-p-1" *ngFor="let faq of processo.faqs">
-            <p-card header={{faq.pergunta}} subheader="Situação: {{faq.ativa ? 'Ativa':'Não está ativa'}}">
+        <div style="text-align: center;">
+            <button class="ui-button-ativar" name="perguntar" style="width: 200px;" (click)="abrirModalPergunta()" pButton label="FAZER PERGUNTA"></button>
+        </div>
+        <div style="margin-top: 20px;" class="p-p-1" *ngFor="let faq of processo.faqs">
+            <p-card *ngIf="faq.ativa || authService.jwtPayload.authorities?.includes('EDITAR_PROCESSOS')" header={{faq.pergunta}} subheader="Situação: {{faq.ativa ? 'Ativa':'Inativado'}}">
                 <ng-template pTemplate="header"></ng-template>
                 <p>{{faq.resposta}}</p>
+                <div *ngIf="authService.jwtPayload.authorities?.includes('EDITAR_PROCESSOS')" style="margin-top: 50px; text-align: right;">
+                    <button *ngIf="!faq.ativa" class="ui-button-ativar" name="ativar" style="width: 100px;" pButton label="ATIVAR" (click)="ativarFaq(faq.id)" ></button>
+                    <button *ngIf="faq.ativa" class="ui-button-inativar" name="inativar" style="width: 100px;" (click)="inativarFaq(faq.id)" pButton label="INATIVAR"></button>
+                    <button class="ui-button-remover" name="remover" style="width: 100px; margin-left: 20px;" (click)="removerFaq(faq.id)" pButton label="REMOVER"></button>
+                    <button class="ui-button-ativar" name="responder" style="width: 50px; margin-left: 20px;" (click)="isRespondendoFaq(faq.id) ? renovarRespondendoFaq() : selecionarFaq(faq)" pButton label="{{isRespondendoFaq(faq.id) ? '-' : '+'}}"></button>
+                </div>
+                <div *ngIf="isRespondendoFaq(faq.id)" style="margin-top: 50px;">
+                    <form autocomplete="off" #formularioResponderFaq="ngForm">
+                        <textarea style="width: 100%;" name="inputResposta" #inputResposta="ngModel" [(ngModel)]="respostaFaq.resposta" required pInputTextarea></textarea>
+                        <button class="ui-button-ativar" [disabled]="formularioResponderFaq.invalid" name="remover" style="width: 200px;" (click)="responder()" pButton label="RESPONDER"></button>
+                    </form>
+                </div>
             </p-card>
         </div>
     </p-tabPanel>
@@ -31,8 +46,8 @@
                     <th>NOME DO PDF
                         <p-columnFilter type="text" field="nome" display="menu"></p-columnFilter>
                     </th>
-                    <th>PDF
-                        <p-columnFilter type="text" field="nome" display="menu"></p-columnFilter>
+                    <th>
+                        
                     </th>
 
                 </tr>
@@ -43,13 +58,13 @@
                     <td>{{anexo.documento.id}}</td>
                     <td>{{anexo.documento.contentType}}</td>
                     <td>{{anexo.documento.nomeArquivo}}</td>
-                    <td><i class="pi pi-search" (click)="abrirArquivo(anexo.documento.url)" style="font-size: 1.5rem; margin-left: 60px;"></i>
-                        <i class="pi pi-trash" (click)="removerAnexo(anexo.id)" style="font-size: 1.5rem; margin-left: 60px;"></i></td>
+                    <td><i class="button" class="pi pi-search" (click)="abrirArquivo(anexo.documento.url)" style="font-size: 1.5rem; margin-left: 60px;"></i>
+                        <i *ngIf="authService.jwtPayload.authorities?.includes('EDITAR_DOCUMENTOS_PERGUNTAS')" class="pi pi-trash" (click)="removerAnexo(anexo.id)" style="font-size: 1.5rem; margin-left: 60px;"></i></td>
                 </tr>
             </ng-template>
         </p-table>
 
-        <div class="p-grid" style="margin-left: 20px; margin-top: 20px;">
+        <div *ngIf="authService.jwtPayload.authorities?.includes('EDITAR_DOCUMENTOS_PERGUNTAS')" class="p-grid" style="margin-left: 20px; margin-top: 20px;">
             <div>
               <p-fileUpload id="botaoSubirAnexoPdf" name="botaoSubirAnexoPdf" accept=".pdf" name="myfile[]" mode="basic" customUpload="true" (uploadHandler)="subirAnexoPdf($event)"></p-fileUpload>
             </div>
@@ -78,8 +93,8 @@
                     <th>NOME DO PDF
                         <p-columnFilter type="text" field="nome" display="menu"></p-columnFilter>
                     </th>
-                    <th>PDF
-                        <p-columnFilter type="text" field="nome" display="menu"></p-columnFilter>
+                    <th>
+                        
                     </th>
 
                 </tr>
@@ -92,12 +107,12 @@
                     <td>{{guia.documento.nomeArquivo}}</td>
                     <!-- <td><button pButton (click)="abrirArquivo(guia.documento.url)" label="Abrir"></button></td> -->
                     <td><i class="pi pi-search" (click)="abrirArquivo(guia.documento.url)" style="font-size: 1.5rem; margin-left: 60px;"></i>
-                      <i class="pi pi-trash" (click)="removerGuia(guia.id)" style="font-size: 1.5rem; margin-left: 60px;"></i></td>
+                      <i *ngIf="authService.jwtPayload.authorities?.includes('EDITAR_DOCUMENTOS_PERGUNTAS')" class="pi pi-trash" (click)="removerGuia(guia.id)" style="font-size: 1.5rem; margin-left: 60px;"></i></td>
                 </tr>
             </ng-template>
         </p-table>
 
-        <div class="p-grid" style="margin-left: 20px; margin-top: 20px;">
+        <div *ngIf="authService.jwtPayload.authorities?.includes('EDITAR_DOCUMENTOS_PERGUNTAS')" class="p-grid" style="margin-left: 20px; margin-top: 20px;">
           <div>
             <p-fileUpload id="botaoSubirGuiaPdf" name="botaoSubirGuiaPdf" accept=".pdf" name="myfile[]" mode="basic" customUpload="true" (uploadHandler)="subirGuiaPdf($event)"></p-fileUpload>
           </div>
@@ -140,13 +155,13 @@
                     <td>{{regulamento.documento.nomeArquivo}}</td>
                     <!-- <td><button pButton (click)="abrirArquivo(regulamento.documento.url)" label="Abrir"></button></td> -->
                     <td><i class="pi pi-search" (click)="abrirArquivo(regulamento.documento.url)" style="font-size: 1.5rem; margin-left: 60px;"></i>
-                      <i class="pi pi-trash" (click)="removerRegulamento(regulamento.id)" style="font-size: 1.5rem; margin-left: 60px;"></i></td>
+                      <i *ngIf="authService.jwtPayload.authorities?.includes('EDITAR_DOCUMENTOS_PERGUNTAS')" class="pi pi-trash" (click)="removerRegulamento(regulamento.id)" style="font-size: 1.5rem; margin-left: 60px;"></i></td>
 
                 </tr>
             </ng-template>
         </p-table>
 
-        <div class="p-grid" style="margin-left: 20px; margin-top: 20px;">
+        <div *ngIf="authService.jwtPayload.authorities?.includes('EDITAR_DOCUMENTOS_PERGUNTAS')" class="p-grid" style="margin-left: 20px; margin-top: 20px;">
           <div>
             <p-fileUpload id="botaoSubirRegulamentoPdf" name="botaoSubirRegulamentoPdf" accept=".pdf" name="myfile[]" mode="basic" customUpload="true" (uploadHandler)="subirRegulamentoPdf($event)"></p-fileUpload>
           </div>
@@ -159,3 +174,14 @@
 </p-tabView>
 </div>
 </div>
+
+<form autocomplete="off" #formularioPergunta="ngForm">
+    <p-dialog header="Qual sua dúvida?" [(visible)]="modalPergunta" [modal]="true" [style]="{width: '600px'}" [baseZIndex]="10000"
+        [draggable]="false" [resizable]="false">
+          <p class="p-m-0">Digite no campo abaixo</p>
+
+          <textarea style="width: 100%;" name="inputPergunta" #inputPergunta="ngModel" [(ngModel)]="perguntaFaq.pergunta" required pInputTextarea></textarea>
+          <button class="ui-button-ativar" [disabled]="formularioPergunta.invalid" name="perguntar" style="width: 200px;" (click)="perguntar()" pButton label="PERGUNTAR"></button>
+
+    </p-dialog>
+</form>

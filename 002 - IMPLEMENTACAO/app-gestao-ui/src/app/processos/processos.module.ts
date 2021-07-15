@@ -7,6 +7,8 @@ import {TableModule} from 'primeng/table';
 import {CardModule} from 'primeng/card';
 import {TabViewModule} from 'primeng/tabview';
 import {FileUploadModule} from 'primeng/fileupload';
+import {InputTextareaModule} from 'primeng/inputtextarea';
+import {DialogModule} from 'primeng/dialog';
 
 import { ProcessosRoutingModule } from './processos-routing.module';
 import { ProcessoCadastroComponent } from './processo-cadastro/processo-cadastro.component';
@@ -28,6 +30,8 @@ import { ProcessoPesquisaComponent } from './processo-pesquisa/processo-pesquisa
     CardModule,
     TabViewModule,
     FileUploadModule,
+    InputTextareaModule,
+    DialogModule,
 
     ProcessosRoutingModule
   ]

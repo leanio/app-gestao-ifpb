@@ -1,0 +1,39 @@
+.ui-button-ativar {
+    border-color: #00965E;
+    background-color: gray;
+}
+.ui-button-ativar:not([disabled]) {
+    background-color: #00965E;
+}
+.ui-button-ativar:not([disabled]):hover {
+    border-color: #00965E;
+    background-color: #006842;
+}
+  
+.ui-button-inativar {
+    border-color: #ff7b00;
+    background-color: gray;
+}
+.ui-button-inativar:not([disabled]) {
+    background-color: #ff7b00;
+}
+.ui-button-inativar:not([disabled]):hover {
+    border-color: #af5500;
+    background-color: #af5500;
+}
+  
+.ui-button-remover {
+    border-color: #db0000;
+    background-color: gray;
+}
+.ui-button-remover:not([disabled]) {
+    background-color: #db0000;
+}
+.ui-button-remover:not([disabled]):hover {
+    border-color: #a80101;
+    background-color: #a80101;
+}
+
+i:hover {
+    cursor: pointer;
+}
