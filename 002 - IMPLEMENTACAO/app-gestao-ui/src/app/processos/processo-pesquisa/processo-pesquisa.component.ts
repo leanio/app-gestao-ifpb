@@ -24,6 +24,10 @@ export class ProcessoPesquisaComponent implements OnInit {
   modalPergunta: boolean;
   perguntaFaq = new FaqPerguntaInput();
 
+  descricaoAnexo: string;
+  descricaoRegulamento: string;
+  descricaoGuia: string;
+
   constructor(
     private processoService: ProcessoService,
     private errorHandlerService: ErrorHandlerService,
@@ -56,10 +60,11 @@ export class ProcessoPesquisaComponent implements OnInit {
     window.open(url, '_blank');
   }
 
-  subirRegulamentoPdf(event) {
+  subirRegulamentoPdf(event): void {
     const regulamento = event.files.shift();
 
-    this.processoService.subirRegulamentoPdf(regulamento, this.codigoCampus, this.codigoProcesso).then(() => {
+    this.processoService.subirRegulamentoPdf(regulamento, this.descricaoRegulamento, this.codigoCampus, this.codigoProcesso).then(() => {
+      this.renovarRegulamento();
       this.buscar();
       this.messageService.add({severity: 'success', summary: 'Sucesso', detail: 'Regulamento salvo'});
     }).catch(e => {
@@ -77,10 +82,11 @@ export class ProcessoPesquisaComponent implements OnInit {
     });
   }
 
-  subirGuiaPdf(event) {
+  subirGuiaPdf(event): void {
     const guia = event.files.shift()
 
-    this.processoService.subirGuiaPdf(guia, this.codigoCampus, this.codigoProcesso).then(() => {
+    this.processoService.subirGuiaPdf(guia, this.descricaoGuia, this.codigoCampus, this.codigoProcesso).then(() => {
+      this.renovarGuia();
       this.buscar();
       this.messageService.add({severity: 'success', summary: 'Sucesso', detail: 'Guia salva'});
     }).catch(e => {
@@ -101,7 +107,8 @@ export class ProcessoPesquisaComponent implements OnInit {
   subirAnexoPdf(event): void {
     const anexo = event.files.shift()
 
-    this.processoService.subirAnexoPdf(anexo, this.codigoCampus, this.codigoProcesso).then(() => {
+    this.processoService.subirAnexoPdf(anexo, this.descricaoAnexo, this.codigoCampus, this.codigoProcesso).then(() => {
+      this.renovarAnexo();
       this.buscar();
       this.messageService.add({severity: 'success', summary: 'Sucesso', detail: 'Anexo salvo'});
     }).catch(e => {
@@ -174,6 +181,18 @@ export class ProcessoPesquisaComponent implements OnInit {
   renovarPerguntaFaq(): void {
     this.perguntaFaq = new FaqPerguntaInput();
     this.modalPergunta = false;
+  }
+
+  renovarAnexo(): void {
+    this.descricaoAnexo = undefined;
+  }
+
+  renovarRegulamento(): void {
+    this.descricaoRegulamento = undefined;
+  }
+
+  renovarGuia(): void {
+    this.descricaoGuia = undefined;
   }
 
   abrirModalPergunta(): void {

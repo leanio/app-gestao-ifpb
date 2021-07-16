@@ -84,6 +84,7 @@ export class DocumentoOutput {
     contentType: string;
     nomeArquivo: string;
     url: string;
+    descricao: string;
 }
 
 export class FaqOutput {

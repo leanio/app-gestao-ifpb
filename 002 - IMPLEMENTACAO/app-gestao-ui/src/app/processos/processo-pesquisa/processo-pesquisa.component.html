@@ -46,6 +46,9 @@
                     <th>NOME DO PDF
                         <p-columnFilter type="text" field="nome" display="menu"></p-columnFilter>
                     </th>
+                    <th>DESCRIÇÃO
+                        <p-columnFilter type="text" field="nome" display="menu"></p-columnFilter>
+                    </th>
                     <th>
                         
                     </th>
@@ -58,6 +61,7 @@
                     <td>{{anexo.documento.id}}</td>
                     <td>{{anexo.documento.contentType}}</td>
                     <td>{{anexo.documento.nomeArquivo}}</td>
+                    <td>{{anexo.documento.descricao}}</td>
                     <td><i class="button" class="pi pi-search" (click)="abrirArquivo(anexo.documento.url)" style="font-size: 1.5rem; margin-left: 60px;"></i>
                         <i *ngIf="authService.jwtPayload.authorities?.includes('EDITAR_DOCUMENTOS_PERGUNTAS')" class="pi pi-trash" (click)="removerAnexo(anexo.id)" style="font-size: 1.5rem; margin-left: 60px;"></i></td>
                 </tr>
@@ -65,11 +69,12 @@
         </p-table>
 
         <div *ngIf="authService.jwtPayload.authorities?.includes('EDITAR_DOCUMENTOS_PERGUNTAS')" class="p-grid" style="margin-left: 20px; margin-top: 20px;">
-            <div>
+            <div style="margin-top: 55px;">
               <p-fileUpload id="botaoSubirAnexoPdf" name="botaoSubirAnexoPdf" accept=".pdf" name="myfile[]" mode="basic" customUpload="true" (uploadHandler)="subirAnexoPdf($event)"></p-fileUpload>
             </div>
             <div style="margin-left: 20px;">
               <h6>Adicionar Novo Anexo</h6>
+              <textarea placeholder="Digite a descrição do anexo" style="width: 400px;" name="inputDescricaoAnexo" #inputDescricaoAnexo="ngModel" [(ngModel)]="descricaoAnexo" pInputTextarea></textarea>
             </div>
           </div>
 
@@ -93,6 +98,9 @@
                     <th>NOME DO PDF
                         <p-columnFilter type="text" field="nome" display="menu"></p-columnFilter>
                     </th>
+                    <th>DESCRIÇÃO
+                        <p-columnFilter type="text" field="nome" display="menu"></p-columnFilter>
+                    </th>
                     <th>
                         
                     </th>
@@ -105,6 +113,7 @@
                     <td>{{guia.documento.id}}</td>
                     <td>{{guia.documento.contentType}}</td>
                     <td>{{guia.documento.nomeArquivo}}</td>
+                    <td>{{guia.documento.descricao}}</td>
                     <!-- <td><button pButton (click)="abrirArquivo(guia.documento.url)" label="Abrir"></button></td> -->
                     <td><i class="pi pi-search" (click)="abrirArquivo(guia.documento.url)" style="font-size: 1.5rem; margin-left: 60px;"></i>
                       <i *ngIf="authService.jwtPayload.authorities?.includes('EDITAR_DOCUMENTOS_PERGUNTAS')" class="pi pi-trash" (click)="removerGuia(guia.id)" style="font-size: 1.5rem; margin-left: 60px;"></i></td>
@@ -113,11 +122,12 @@
         </p-table>
 
         <div *ngIf="authService.jwtPayload.authorities?.includes('EDITAR_DOCUMENTOS_PERGUNTAS')" class="p-grid" style="margin-left: 20px; margin-top: 20px;">
-          <div>
+        <div style="margin-top: 55px;">
             <p-fileUpload id="botaoSubirGuiaPdf" name="botaoSubirGuiaPdf" accept=".pdf" name="myfile[]" mode="basic" customUpload="true" (uploadHandler)="subirGuiaPdf($event)"></p-fileUpload>
           </div>
           <div style="margin-left: 20px;">
             <h6>Adicionar Nova Guia</h6>
+            <textarea placeholder="Digite a descrição do guia" style="width: 400px;" name="inputDescricaoGuia" #inputDescricaoGuia="ngModel" [(ngModel)]="descricaoGuia" pInputTextarea></textarea>
           </div>
         </div>
 
@@ -141,6 +151,9 @@
                     <th>NOME DO PDF
                         <p-columnFilter type="text" field="nome" display="menu"></p-columnFilter>
                     </th>
+                    <th>DESCRIÇÃO
+                        <p-columnFilter type="text" field="nome" display="menu"></p-columnFilter>
+                    </th>
                     <th>
 
                     </th>
@@ -153,6 +166,7 @@
                     <td>{{regulamento.documento.id}}</td>
                     <td>{{regulamento.documento.contentType}}</td>
                     <td>{{regulamento.documento.nomeArquivo}}</td>
+                    <td>{{regulamento.documento.descricao}}</td>
                     <!-- <td><button pButton (click)="abrirArquivo(regulamento.documento.url)" label="Abrir"></button></td> -->
                     <td><i class="pi pi-search" (click)="abrirArquivo(regulamento.documento.url)" style="font-size: 1.5rem; margin-left: 60px;"></i>
                       <i *ngIf="authService.jwtPayload.authorities?.includes('EDITAR_DOCUMENTOS_PERGUNTAS')" class="pi pi-trash" (click)="removerRegulamento(regulamento.id)" style="font-size: 1.5rem; margin-left: 60px;"></i></td>
@@ -162,11 +176,12 @@
         </p-table>
 
         <div *ngIf="authService.jwtPayload.authorities?.includes('EDITAR_DOCUMENTOS_PERGUNTAS')" class="p-grid" style="margin-left: 20px; margin-top: 20px;">
-          <div>
+        <div style="margin-top: 55px;">
             <p-fileUpload id="botaoSubirRegulamentoPdf" name="botaoSubirRegulamentoPdf" accept=".pdf" name="myfile[]" mode="basic" customUpload="true" (uploadHandler)="subirRegulamentoPdf($event)"></p-fileUpload>
           </div>
           <div style="margin-left: 20px;">
             <h6>Adicionar Novo Regulamento</h6>
+            <textarea placeholder="Digite a descrição do regulamento" style="width: 400px;" name="inputDescricaoRegulamento" #inputDescricaoRegulamento="ngModel" [(ngModel)]="descricaoRegulamento" pInputTextarea></textarea>
           </div>
         </div>
 
