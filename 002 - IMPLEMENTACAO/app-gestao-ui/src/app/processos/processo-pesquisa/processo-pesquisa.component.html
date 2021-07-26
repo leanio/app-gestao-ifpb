@@ -16,12 +16,12 @@
                     <button *ngIf="!faq.ativa" class="ui-button-ativar" name="ativar" style="width: 100px;" pButton label="ATIVAR" (click)="ativarFaq(faq.id)" ></button>
                     <button *ngIf="faq.ativa" class="ui-button-inativar" name="inativar" style="width: 100px;" (click)="inativarFaq(faq.id)" pButton label="INATIVAR"></button>
                     <button class="ui-button-remover" name="remover" style="width: 100px; margin-left: 20px;" (click)="removerFaq(faq.id)" pButton label="REMOVER"></button>
-                    <button class="ui-button-ativar" name="responder" style="width: 50px; margin-left: 20px;" (click)="isRespondendoFaq(faq.id) ? renovarRespondendoFaq() : selecionarFaq(faq)" pButton label="{{isRespondendoFaq(faq.id) ? '-' : '+'}}"></button>
+                    <button id="responder" class="ui-button-ativar" name="responder" style="width: 50px; margin-left: 20px;" (click)="isRespondendoFaq(faq.id) ? renovarRespondendoFaq() : selecionarFaq(faq)" pButton label="{{isRespondendoFaq(faq.id) ? '-' : '+'}}"></button>
                 </div>
                 <div *ngIf="isRespondendoFaq(faq.id)" style="margin-top: 50px;">
                     <form autocomplete="off" #formularioResponderFaq="ngForm">
                         <textarea style="width: 100%;" name="inputResposta" #inputResposta="ngModel" [(ngModel)]="respostaFaq.resposta" required pInputTextarea></textarea>
-                        <button class="ui-button-ativar" [disabled]="formularioResponderFaq.invalid" name="remover" style="width: 200px;" (click)="responder()" pButton label="RESPONDER"></button>
+                        <button class="ui-button-ativar" [disabled]="formularioResponderFaq.invalid" name="responderPergunta" style="width: 200px;" (click)="responder()" pButton label="RESPONDER"></button>
                     </form>
                 </div>
             </p-card>
@@ -50,7 +50,7 @@
                         <p-columnFilter type="text" field="nome" display="menu"></p-columnFilter>
                     </th>
                     <th>
-                        
+
                     </th>
 
                 </tr>
@@ -102,7 +102,7 @@
                         <p-columnFilter type="text" field="nome" display="menu"></p-columnFilter>
                     </th>
                     <th>
-                        
+
                     </th>
 
                 </tr>
@@ -196,7 +196,7 @@
           <p class="p-m-0">Digite no campo abaixo</p>
 
           <textarea style="width: 100%;" name="inputPergunta" #inputPergunta="ngModel" [(ngModel)]="perguntaFaq.pergunta" required pInputTextarea></textarea>
-          <button class="ui-button-ativar" [disabled]="formularioPergunta.invalid" name="perguntar" style="width: 200px;" (click)="perguntar()" pButton label="PERGUNTAR"></button>
+          <button class="ui-button-ativar" [disabled]="formularioPergunta.invalid" name="confirmarPergunta" style="width: 200px;" (click)="perguntar()" pButton label="PERGUNTAR"></button>
 
     </p-dialog>
 </form>
