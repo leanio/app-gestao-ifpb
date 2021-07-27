@@ -24,9 +24,21 @@ export class ProcessoPesquisaComponent implements OnInit {
   modalPergunta: boolean;
   perguntaFaq = new FaqPerguntaInput();
 
+  tituloAnexo: string;
+  tituloRegulamento: string;
+  tituloGuia: string;
+
   descricaoAnexo: string;
   descricaoRegulamento: string;
   descricaoGuia: string;
+
+  regulamento: any;
+  anexo: any;
+  guia: any;
+
+  qtdFaqsNRespondidos: number;
+  qtdFaqsRespondidos: number;
+  totalFaqs: number;
 
   constructor(
     private processoService: ProcessoService,
@@ -46,6 +58,9 @@ export class ProcessoPesquisaComponent implements OnInit {
   buscar(): void {
     this.processoService.buscar(this.codigoCampus, this.codigoProcesso).then(dados => {
       this.processo = dados;
+      this.qtdFaqsNRespondidos = this.getQtdFaqsNRespondidos();
+      this.qtdFaqsRespondidos = this.getQtdFaqsRespondidos();
+      this.totalFaqs = this.getTotalFaqs();
     });
   }
 
@@ -56,21 +71,8 @@ export class ProcessoPesquisaComponent implements OnInit {
     })
   }
 
-  abrirArquivo(url: string) {
+  abrirArquivo(url: string): void {
     window.open(url, '_blank');
-  }
-
-  subirRegulamentoPdf(event): void {
-    const regulamento = event.files.shift();
-
-    this.processoService.subirRegulamentoPdf(regulamento, this.descricaoRegulamento, this.codigoCampus, this.codigoProcesso).then(() => {
-      this.renovarRegulamento();
-      this.buscar();
-      this.messageService.add({severity: 'success', summary: 'Sucesso', detail: 'Regulamento salvo'});
-    }).catch(e => {
-      this.errorHandlerService.handle(e);
-    });
-
   }
 
   removerGuia(codigoGuia: number): void {
@@ -82,19 +84,6 @@ export class ProcessoPesquisaComponent implements OnInit {
     });
   }
 
-  subirGuiaPdf(event): void {
-    const guia = event.files.shift()
-
-    this.processoService.subirGuiaPdf(guia, this.descricaoGuia, this.codigoCampus, this.codigoProcesso).then(() => {
-      this.renovarGuia();
-      this.buscar();
-      this.messageService.add({severity: 'success', summary: 'Sucesso', detail: 'Guia salva'});
-    }).catch(e => {
-      this.errorHandlerService.handle(e);
-    });
-
-  }
-
   removerAnexo(codigoAnexo: number): void {
     this.processoService.removerAnexo(this.codigoCampus, this.codigoProcesso, codigoAnexo).then(dados => {
       this.buscar();
@@ -102,19 +91,6 @@ export class ProcessoPesquisaComponent implements OnInit {
     }).catch(e => {
       this.errorHandlerService.handle(e);
     });
-  }
-
-  subirAnexoPdf(event): void {
-    const anexo = event.files.shift()
-
-    this.processoService.subirAnexoPdf(anexo, this.descricaoAnexo, this.codigoCampus, this.codigoProcesso).then(() => {
-      this.renovarAnexo();
-      this.buscar();
-      this.messageService.add({severity: 'success', summary: 'Sucesso', detail: 'Anexo salvo'});
-    }).catch(e => {
-      this.errorHandlerService.handle(e);
-    });
-
   }
 
   ativarFaq(codigoFaq: number): void {
@@ -184,19 +160,90 @@ export class ProcessoPesquisaComponent implements OnInit {
   }
 
   renovarAnexo(): void {
+    this.anexo = undefined;
     this.descricaoAnexo = undefined;
+    this.tituloAnexo = undefined;
   }
 
   renovarRegulamento(): void {
+    this.regulamento = undefined;
     this.descricaoRegulamento = undefined;
+    this.tituloRegulamento = undefined;
   }
 
   renovarGuia(): void {
+    this.guia = undefined;
     this.descricaoGuia = undefined;
+    this.tituloGuia = undefined;
   }
 
   abrirModalPergunta(): void {
     this.modalPergunta = true;
+  }
+
+  faqRespondido(faq: FaqOutput): boolean {
+    return faq.resposta.trim().length > 0 && faq.resposta.trim() != "A pergunta ainda não foi respondida.";
+  }
+
+  getQtdFaqsNRespondidos(): number {
+    return this.processo.faqs.filter(faq => !this.faqRespondido(faq)).length;
+  }
+
+  getQtdFaqsRespondidos(): number {
+    return this.processo.faqs.filter(faq => this.faqRespondido(faq)).length;
+  }
+
+  getTotalFaqs(): number {
+    return this.processo.faqs.length;
+  }
+
+  subirRegulamento() {
+    this.processoService.subirRegulamentoPdf(this.regulamento, this.tituloRegulamento, this.descricaoRegulamento, this.codigoCampus, this.codigoProcesso).then(() => {
+      this.renovarRegulamento();
+      this.buscar();
+      this.messageService.add({severity: 'success', summary: 'Sucesso', detail: 'Regulamento salvo'});
+    }).catch(e => {
+      this.errorHandlerService.handle(e);
+    });
+  }
+
+  selecionarRegulamento(event) {
+    if (event.target.files.length > 0) {
+      this.regulamento = event.target.files[0];
+    }
+  }
+
+  subirAnexo() {
+    this.processoService.subirAnexoPdf(this.anexo, this.tituloAnexo, this.descricaoAnexo, this.codigoCampus, this.codigoProcesso).then(() => {
+      this.renovarAnexo();
+      this.buscar();
+      this.messageService.add({severity: 'success', summary: 'Sucesso', detail: 'Anexo salvo'});
+    }).catch(e => {
+      this.errorHandlerService.handle(e);
+    });
+  }
+
+  selecionarAnexo(event) {
+    if (event.target.files.length > 0) {
+      this.anexo = event.target.files[0];
+    }
+  }
+
+  subirGuia() {
+    this.processoService.subirGuiaPdf(this.guia, this.tituloGuia, this.descricaoGuia, this.codigoCampus, this.codigoProcesso).then(() => {
+      this.renovarGuia();
+      this.buscar();
+      this.messageService.add({severity: 'success', summary: 'Sucesso', detail: 'Guia salva'});
+    }).catch(e => {
+      this.errorHandlerService.handle(e);
+    });
+  }
+
+
+  selecionarGuia(event) {
+    if (event.target.files.length > 0) {
+      this.guia = event.target.files[0];
+    }
   }
 
 }

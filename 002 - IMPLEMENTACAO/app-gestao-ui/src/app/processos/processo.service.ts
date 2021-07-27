@@ -62,11 +62,12 @@ export class ProcessoService {
     return this.httpClient.delete(this.url + `/${codigoCampus}/processos/${codigoProcesso}/faqs/${codigoFaq}`, {headers}).toPromise().then();
   }
 
-  async subirRegulamentoPdf(arquivo: any, descricao: string, codigoCampus: number, codigoProcesso: number): Promise<any> {
+  async subirRegulamentoPdf(arquivo: any, titulo: string, descricao: string, codigoCampus: number, codigoProcesso: number): Promise<any> {
     const formData = new FormData();
     formData.append('arquivo', arquivo);
     formData.append('nomeArquivo', arquivo.name);
     formData.append('descricao', descricao);
+    formData.append('titulo', titulo);
     formData.append('contentType', 'multipart/form-data');
 
     return this.httpClient.post(this.url + `/${codigoCampus}/processos/${codigoProcesso}/regulamentos`, formData).toPromise();
@@ -76,11 +77,12 @@ export class ProcessoService {
     return this.httpClient.delete<any>(this.url + `/${codigoCampus}/processos/${codigoProcesso}/guias/${codigoGuia}`).toPromise();
   }
 
-  async subirGuiaPdf(arquivo: any, descricao: string, codigoCampus: number, codigoGuia: number): Promise<any> {
+  async subirGuiaPdf(arquivo: any, titulo: string, descricao: string, codigoCampus: number, codigoGuia: number): Promise<any> {
     const formData = new FormData();
     formData.append('arquivo', arquivo);
     formData.append('nomeArquivo', arquivo.name);
     formData.append('descricao', descricao);
+    formData.append('titulo', titulo);
     formData.append('contentType', 'multipart/form-data');
 
     return this.httpClient.post(this.url + `/${codigoCampus}/processos/${codigoGuia}/guias`, formData).toPromise();
@@ -90,11 +92,12 @@ export class ProcessoService {
     return this.httpClient.delete<any>(this.url + `/${codigoCampus}/processos/${codigoProcesso}/anexos/${codigoAnexo}`).toPromise();
   }
 
-  async subirAnexoPdf(arquivo: any, descricao: string, codigoCampus: number, codigoAnexo: number): Promise<any> {
+  async subirAnexoPdf(arquivo: any, titulo: string, descricao: string, codigoCampus: number, codigoAnexo: number): Promise<any> {
     const formData = new FormData();
     formData.append('arquivo', arquivo);
     formData.append('nomeArquivo', arquivo.name);
     formData.append('descricao', descricao);
+    formData.append('titulo', titulo);
     formData.append('contentType', 'multipart/form-data');
 
     return this.httpClient.post(this.url + `/${codigoCampus}/processos/${codigoAnexo}/anexos`, formData).toPromise();

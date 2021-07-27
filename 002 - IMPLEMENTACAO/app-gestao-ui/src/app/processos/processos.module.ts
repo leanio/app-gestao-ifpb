@@ -9,6 +9,8 @@ import {TabViewModule} from 'primeng/tabview';
 import {FileUploadModule} from 'primeng/fileupload';
 import {InputTextareaModule} from 'primeng/inputtextarea';
 import {DialogModule} from 'primeng/dialog';
+import {BadgeModule} from 'primeng/badge';
+import {TooltipModule} from 'primeng/tooltip';
 
 import { ProcessosRoutingModule } from './processos-routing.module';
 import { ProcessoCadastroComponent } from './processo-cadastro/processo-cadastro.component';
@@ -32,6 +34,8 @@ import { ProcessoPesquisaComponent } from './processo-pesquisa/processo-pesquisa
     FileUploadModule,
     InputTextareaModule,
     DialogModule,
+    BadgeModule,
+    TooltipModule,
 
     ProcessosRoutingModule
   ]

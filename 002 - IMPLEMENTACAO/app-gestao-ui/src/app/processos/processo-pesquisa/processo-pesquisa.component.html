@@ -3,6 +3,11 @@
 <p-tabView>
     <p-tabPanel header="FAQs">
         <div>
+            <div style="text-align: right;">
+                <p-badge value="{{qtdFaqsNRespondidos}}" size="large" severity="warning" pTooltip="Quantidade de perguntas não respondidas" tooltipPosition="left"></p-badge>
+                <p-badge value="{{qtdFaqsRespondidos}}" style="margin-left: 10px;" size="large" severity="success" pTooltip="Quantidade de perguntas respondidas" tooltipPosition="left"></p-badge>
+                <p-badge value="{{totalFaqs}}" style="margin-left: 10px;" size="large" severity="info" pTooltip="Quantidade de perguntas (ativas e inativas)" tooltipPosition="left"></p-badge>
+            </div>
             <h1>FAQs</h1>
         </div>
         <div style="text-align: center;">
@@ -46,6 +51,9 @@
                     <th>NOME DO PDF
                         <p-columnFilter type="text" field="nome" display="menu"></p-columnFilter>
                     </th>
+                    <th>TÍTULO
+                        <p-columnFilter type="text" field="nome" display="menu"></p-columnFilter>
+                    </th>
                     <th>DESCRIÇÃO
                         <p-columnFilter type="text" field="nome" display="menu"></p-columnFilter>
                     </th>
@@ -61,6 +69,7 @@
                     <td>{{anexo.documento.id}}</td>
                     <td>{{anexo.documento.contentType}}</td>
                     <td>{{anexo.documento.nomeArquivo}}</td>
+                    <td>{{anexo.documento.titulo}}</td>
                     <td>{{anexo.documento.descricao}}</td>
                     <td>
                       <a class="alterar-cor-verde">
@@ -72,13 +81,16 @@
         </p-table>
 
         <div *ngIf="authService.jwtPayload.authorities?.includes('EDITAR_DOCUMENTOS_PERGUNTAS')" class="p-grid" style="margin-left: 20px; margin-top: 20px;">
-            <div style="margin-top: 55px;">
-              <p-fileUpload id="botaoSubirAnexoPdf" name="botaoSubirAnexoPdf" accept=".pdf" name="myfile[]" mode="basic" customUpload="true" (uploadHandler)="subirAnexoPdf($event)"></p-fileUpload>
-            </div>
-            <div style="margin-left: 20px;">
-              <h6>Adicionar Novo Anexo</h6>
-              <textarea placeholder="Digite a descrição do anexo" style="width: 400px;" name="inputDescricaoAnexo" #inputDescricaoAnexo="ngModel" [(ngModel)]="descricaoAnexo" pInputTextarea></textarea>
-            </div>
+            <form #formSubirRegulamento="ngForm" (ngSubmit)="subirAnexo()">      
+                <div>
+                  <input type="file" name="anexoPdf" (change)="selecionarAnexo($event)" />
+                </div>
+                <div *ngIf="anexo">
+                  <input type="text" name="inputTituloAnexo" pInputText [(ngModel)]="tituloAnexo" placeholder="Digite o titulo do anexo">  
+                  <textarea placeholder="Digite a descrição do anexo" style="width: 400px;" name="inputDescricaoAnexo" #inputDescricaoAnexo="ngModel" [(ngModel)]="descricaoAnexo" pInputTextarea></textarea>
+                  <button type="submit">Subir</button>
+                </div>
+            </form>
           </div>
 
     </p-tabPanel>
@@ -101,6 +113,9 @@
                     <th>NOME DO PDF
                         <p-columnFilter type="text" field="nome" display="menu"></p-columnFilter>
                     </th>
+                    <th>TÍTULO
+                        <p-columnFilter type="text" field="nome" display="menu"></p-columnFilter>
+                    </th>
                     <th>DESCRIÇÃO
                         <p-columnFilter type="text" field="nome" display="menu"></p-columnFilter>
                     </th>
@@ -116,6 +131,7 @@
                     <td>{{guia.documento.id}}</td>
                     <td>{{guia.documento.contentType}}</td>
                     <td>{{guia.documento.nomeArquivo}}</td>
+                    <td>{{guia.documento.titulo}}</td>
                     <td>{{guia.documento.descricao}}</td>
                     <!-- <td><button pButton (click)="abrirArquivo(guia.documento.url)" label="Abrir"></button></td> -->
                     <td>
@@ -128,13 +144,16 @@
         </p-table>
 
         <div *ngIf="authService.jwtPayload.authorities?.includes('EDITAR_DOCUMENTOS_PERGUNTAS')" class="p-grid" style="margin-left: 20px; margin-top: 20px;">
-        <div style="margin-top: 55px;">
-            <p-fileUpload id="botaoSubirGuiaPdf" name="botaoSubirGuiaPdf" accept=".pdf" name="myfile[]" mode="basic" customUpload="true" (uploadHandler)="subirGuiaPdf($event)"></p-fileUpload>
-          </div>
-          <div style="margin-left: 20px;">
-            <h6>Adicionar Nova Guia</h6>
-            <textarea placeholder="Digite a descrição do guia" style="width: 400px;" name="inputDescricaoGuia" #inputDescricaoGuia="ngModel" [(ngModel)]="descricaoGuia" pInputTextarea></textarea>
-          </div>
+            <form #formSubirRegulamento="ngForm" (ngSubmit)="subirGuia()">      
+                <div>
+                  <input type="file" name="guiaPdf" (change)="selecionarGuia($event)" />
+                </div>
+                <div *ngIf="guia">
+                  <input type="text" name="inputTituloGuia" pInputText [(ngModel)]="tituloGuia" placeholder="Digite o titulo do guia">  
+                  <textarea placeholder="Digite a descrição do guia" style="width: 400px;" name="inputDescricaoGuia" #inputDescricaoGuia="ngModel" [(ngModel)]="descricaoGuia" pInputTextarea></textarea>
+                  <button type="submit">Subir</button>
+                </div>
+            </form>
         </div>
 
     </p-tabPanel>
@@ -157,6 +176,9 @@
                     <th>NOME DO PDF
                         <p-columnFilter type="text" field="nome" display="menu"></p-columnFilter>
                     </th>
+                    <th>TÍTULO
+                        <p-columnFilter type="text" field="nome" display="menu"></p-columnFilter>
+                    </th>
                     <th>DESCRIÇÃO
                         <p-columnFilter type="text" field="nome" display="menu"></p-columnFilter>
                     </th>
@@ -172,6 +194,7 @@
                     <td>{{regulamento.documento.id}}</td>
                     <td>{{regulamento.documento.contentType}}</td>
                     <td>{{regulamento.documento.nomeArquivo}}</td>
+                    <td>{{regulamento.documento.titulo}}</td>
                     <td>{{regulamento.documento.descricao}}</td>
                     <!-- <td><button pButton (click)="abrirArquivo(regulamento.documento.url)" label="Abrir"></button></td> -->
                     <td>
@@ -185,13 +208,16 @@
         </p-table>
 
         <div *ngIf="authService.jwtPayload.authorities?.includes('EDITAR_DOCUMENTOS_PERGUNTAS')" class="p-grid" style="margin-left: 20px; margin-top: 20px;">
-        <div style="margin-top: 55px;">
-            <p-fileUpload id="botaoSubirRegulamentoPdf" name="botaoSubirRegulamentoPdf" accept=".pdf" name="myfile[]" mode="basic" customUpload="true" (uploadHandler)="subirRegulamentoPdf($event)"></p-fileUpload>
-          </div>
-          <div style="margin-left: 20px;">
-            <h6>Adicionar Novo Regulamento</h6>
-            <textarea placeholder="Digite a descrição do regulamento" style="width: 400px;" name="inputDescricaoRegulamento" #inputDescricaoRegulamento="ngModel" [(ngModel)]="descricaoRegulamento" pInputTextarea></textarea>
-          </div>
+            <form #formSubirRegulamento="ngForm" (ngSubmit)="subirRegulamento()">      
+                <div>
+                  <input type="file" name="regulamentoPdf" (change)="selecionarRegulamento($event)" />
+                </div>
+                <div *ngIf="regulamento">
+                  <input type="text" name="inputTituloRegulamento" pInputText [(ngModel)]="tituloRegulamento" placeholder="Digite o titulo do regulamento">  
+                  <textarea placeholder="Digite a descrição do regulamento" style="width: 400px;" name="inputDescricaoAnexo" #inputDescricaoRegulamento="ngModel" [(ngModel)]="descricaoRegulamento" pInputTextarea></textarea>
+                  <button type="submit">Subir</button>
+                </div>
+            </form>
         </div>
 
     </p-tabPanel>
