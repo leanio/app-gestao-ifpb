@@ -22,3 +22,15 @@ body {
   cursor: pointer;
 }
 
+.alterar-cor-verde :hover {
+  color: #00965E !important;
+}
+
+.alterar-cor-vermelho :hover {
+  color: rgb(255, 95, 95) !important;
+}
+
+
+
+
+

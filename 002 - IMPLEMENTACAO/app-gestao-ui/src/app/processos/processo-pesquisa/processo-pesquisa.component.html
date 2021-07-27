@@ -15,13 +15,13 @@
                 <div *ngIf="authService.jwtPayload.authorities?.includes('EDITAR_PROCESSOS')" style="margin-top: 50px; text-align: right;">
                     <button *ngIf="!faq.ativa" class="ui-button-ativar" name="ativar" style="width: 100px;" pButton label="ATIVAR" (click)="ativarFaq(faq.id)" ></button>
                     <button *ngIf="faq.ativa" class="ui-button-inativar" name="inativar" style="width: 100px;" (click)="inativarFaq(faq.id)" pButton label="INATIVAR"></button>
-                    <button class="ui-button-remover" name="remover" style="width: 100px; margin-left: 20px;" (click)="removerFaq(faq.id)" pButton label="REMOVER"></button>
-                    <button id="responder" class="ui-button-ativar" name="responder" style="width: 50px; margin-left: 20px;" (click)="isRespondendoFaq(faq.id) ? renovarRespondendoFaq() : selecionarFaq(faq)" pButton label="{{isRespondendoFaq(faq.id) ? '-' : '+'}}"></button>
+                    <button class="ui-button-remover" name="remover" style="width: 165px; margin-left: 20px;" (click)="removerFaq(faq.id)" pButton label="EXCLUIR PERGUNTA"></button>
+                    <button id="responder" class="ui-button-ativar" name="responder" style="width: 155px; margin-left: 20px;" (click)="isRespondendoFaq(faq.id) ? renovarRespondendoFaq() : selecionarFaq(faq)" pButton label="{{isRespondendoFaq(faq.id) ? '-' : 'EDITAR RESPOSTA'}}"></button>
                 </div>
                 <div *ngIf="isRespondendoFaq(faq.id)" style="margin-top: 50px;">
                     <form autocomplete="off" #formularioResponderFaq="ngForm">
                         <textarea style="width: 100%;" name="inputResposta" #inputResposta="ngModel" [(ngModel)]="respostaFaq.resposta" required pInputTextarea></textarea>
-                        <button class="ui-button-ativar" [disabled]="formularioResponderFaq.invalid" name="responderPergunta" style="width: 200px;" (click)="responder()" pButton label="RESPONDER"></button>
+                        <button class="ui-button-ativar" [disabled]="formularioResponderFaq.invalid" name="responderPergunta" style="width: 200px;" (click)="responder()" pButton label="EDITAR RESPOSTA"></button>
                     </form>
                 </div>
             </p-card>
@@ -62,8 +62,11 @@
                     <td>{{anexo.documento.contentType}}</td>
                     <td>{{anexo.documento.nomeArquivo}}</td>
                     <td>{{anexo.documento.descricao}}</td>
-                    <td><i class="button" class="pi pi-search" (click)="abrirArquivo(anexo.documento.url)" style="font-size: 1.5rem; margin-left: 60px;"></i>
-                        <i *ngIf="authService.jwtPayload.authorities?.includes('EDITAR_DOCUMENTOS_PERGUNTAS')" class="pi pi-trash" (click)="removerAnexo(anexo.id)" style="font-size: 1.5rem; margin-left: 60px;"></i></td>
+                    <td>
+                      <a class="alterar-cor-verde">
+                      <i class="pi pi-search" (click)="abrirArquivo(anexo.documento.url)" style="font-size: 1.5rem; margin-left: 60px;"></i></a>
+                      <a class="alterar-cor-vermelho">
+                      <i *ngIf="authService.jwtPayload.authorities?.includes('EDITAR_DOCUMENTOS_PERGUNTAS')" class="pi pi-trash" (click)="removerAnexo(anexo.id)" style="font-size: 1.5rem; margin-left: 60px;"></i></a></td>
                 </tr>
             </ng-template>
         </p-table>
@@ -115,8 +118,11 @@
                     <td>{{guia.documento.nomeArquivo}}</td>
                     <td>{{guia.documento.descricao}}</td>
                     <!-- <td><button pButton (click)="abrirArquivo(guia.documento.url)" label="Abrir"></button></td> -->
-                    <td><i class="pi pi-search" (click)="abrirArquivo(guia.documento.url)" style="font-size: 1.5rem; margin-left: 60px;"></i>
-                      <i *ngIf="authService.jwtPayload.authorities?.includes('EDITAR_DOCUMENTOS_PERGUNTAS')" class="pi pi-trash" (click)="removerGuia(guia.id)" style="font-size: 1.5rem; margin-left: 60px;"></i></td>
+                    <td>
+                      <a class="alterar-cor-verde">
+                      <i class="pi pi-search" (click)="abrirArquivo(guia.documento.url)" style="font-size: 1.5rem; margin-left: 60px;"></i></a>
+                      <a class="alterar-cor-vermelho">
+                      <i *ngIf="authService.jwtPayload.authorities?.includes('EDITAR_DOCUMENTOS_PERGUNTAS')" class="pi pi-trash" (click)="removerGuia(guia.id)" style="font-size: 1.5rem; margin-left: 60px;"></i></a></td>
                 </tr>
             </ng-template>
         </p-table>
@@ -168,8 +174,11 @@
                     <td>{{regulamento.documento.nomeArquivo}}</td>
                     <td>{{regulamento.documento.descricao}}</td>
                     <!-- <td><button pButton (click)="abrirArquivo(regulamento.documento.url)" label="Abrir"></button></td> -->
-                    <td><i class="pi pi-search" (click)="abrirArquivo(regulamento.documento.url)" style="font-size: 1.5rem; margin-left: 60px;"></i>
-                      <i *ngIf="authService.jwtPayload.authorities?.includes('EDITAR_DOCUMENTOS_PERGUNTAS')" class="pi pi-trash" (click)="removerRegulamento(regulamento.id)" style="font-size: 1.5rem; margin-left: 60px;"></i></td>
+                    <td>
+                      <a class="alterar-cor-verde">
+                      <i class="pi pi-search" (click)="abrirArquivo(regulamento.documento.url)" style="font-size: 1.5rem; margin-left: 60px;"></i></a>
+                      <a class="alterar-cor-vermelho">
+                      <i *ngIf="authService.jwtPayload.authorities?.includes('EDITAR_DOCUMENTOS_PERGUNTAS')" class="pi pi-trash" (click)="removerRegulamento(regulamento.id)" style="font-size: 1.5rem; margin-left: 60px;"></i></a></td>
 
                 </tr>
             </ng-template>

@@ -20,15 +20,16 @@
                 <td>{{product.id}}</td>
                 <td>{{product.nome}}</td>
                 <td>
-                    <a class="button" routerLink="/processos/pesquisa/{{authService.jwtPayload.campus_id}}/{{product.id}}" mat-button>
-                        <i class="pi pi-search" style="font-size: 1.5rem"></i>
+                    <a class="alterar-cor-verde" routerLink="/processos/pesquisa/{{authService.jwtPayload.campus_id}}/{{product.id}}" >
+                        <i class="pi pi-search " style="font-size: 1.5rem; "></i>
                       </a>
+
                 </td>
             </tr>
         </ng-template>
     </p-table>
   </div>
-  <div class="p-col p-as-end" style="margin-right: 30px; text-align: right; padding-bottom: 20px;">
+  <div class="p-col p-as-end" style="margin-right: 30px; text-align: right; padding-bottom: 20px;" *ngIf="authService.jwtPayload.authorities?.includes('EDITAR_PROCESSOS')">
     <button id="botaoNovoProcesso" class="ui-button-success" routerLink="/processos/cadastro/{{codigoCampus}}" pButton type="button" style="width: 200px; height: 50px; font-weight: bold; font-size: 20px;" label="NOVO PROCESSO" ></button>
   </div>
 </div>
