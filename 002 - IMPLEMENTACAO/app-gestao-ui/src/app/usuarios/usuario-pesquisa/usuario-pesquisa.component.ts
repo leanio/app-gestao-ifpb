@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from 'src/app/autenticacao/auth.service';
 import { ErrorHandlerService } from 'src/app/core/error-handler.service';
 import { UsuarioService } from '../usuario.service';
 
@@ -13,7 +14,8 @@ export class UsuarioPesquisaComponent implements OnInit {
 
   constructor(
     private usuarioService: UsuarioService,
-    private errorHandlerService: ErrorHandlerService
+    private errorHandlerService: ErrorHandlerService,
+    public authService: AuthService
   ) { }
 
   ngOnInit(): void {

@@ -1,0 +1,11 @@
+.ui-button-ativar {
+    border-color: #00965E;
+    background-color: gray;
+}
+.ui-button-ativar:not([disabled]) {
+    background-color: #00965E;
+}
+.ui-button-ativar:not([disabled]):hover {
+    border-color: #00965E;
+    background-color: #006842;
+}
