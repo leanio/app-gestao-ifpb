@@ -10,15 +10,25 @@ import { AuthService } from './autenticacao/auth.service';
 export class AppComponent implements OnInit {
   title = 'app-gestao-ui';
 
+  urlDesbloqueadas = ['/usuarios/cadastro'];
+  urlAtual: string;
+
   constructor(
     public authService: AuthService,
-    private router: Router
+    private router: Router,
   ) { 
-    this.verificarAutenticacao(); 
+    
   }
   
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
+    await this.carregarUrl();
+    this.verificarAutenticacao(); 
+  }
 
+  async carregarUrl(): Promise<void> {
+    this.router.events.subscribe(changeEvent => {
+      if (changeEvent['url']) this.urlAtual = changeEvent["url"];
+    });
   }
 
   logout(): void {
@@ -31,7 +41,7 @@ export class AppComponent implements OnInit {
   }
 
   verificarAutenticacao(): void {
-    if (!this.authService.isAutenticado()) {
+    if (!this.authService.isAutenticado() && !this.urlDesbloqueadas.includes(this.urlAtual)) {
       this.navegarParaLogin();
     }
   }

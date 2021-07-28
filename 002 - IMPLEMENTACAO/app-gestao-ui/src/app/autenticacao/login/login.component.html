@@ -43,7 +43,7 @@
 
         <div>
           <button class="inscrever" name="inscrever" style="width: 90%; margin-top: 10px;" pButton label="INSCREVER-SE"
-            (click)="login(inputEmail.value, inputSenha.value); inputSenha.value=''"></button>
+          routerLink="/usuarios/cadastro"></button>
         </div>
 
       </form>
@@ -83,7 +83,7 @@
             </span> 
 
             <button class="ui-button-success" name="salvarNovaSenha" [disabled]="formularioEsqueceuSenha.invalid" style="width: 80%; margin-top: 20px;" pButton label="SALVAR"
-            (click)="salvarNovaSenha()"></button>
+            (click)="salvarNovaSenha()"></button> 
           </div>
   </p-dialog>
 </form>
