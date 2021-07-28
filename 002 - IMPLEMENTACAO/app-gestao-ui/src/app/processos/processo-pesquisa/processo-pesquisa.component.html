@@ -81,14 +81,22 @@
         </p-table>
 
         <div *ngIf="authService.jwtPayload.authorities?.includes('EDITAR_DOCUMENTOS_PERGUNTAS')" class="p-grid" style="margin-left: 20px; margin-top: 20px;">
-            <form #formSubirRegulamento="ngForm" (ngSubmit)="subirAnexo()">      
+            <form #formSubirAnexo="ngForm" (ngSubmit)="subirAnexo()">
                 <div>
-                  <input type="file" name="anexoPdf" (change)="selecionarAnexo($event)" />
+                  <label for="filesAnexo" class="p-button ui-button-ativar">Escolher Arquivo</label>
+                  {{anexo?.name}}
+                  <input id="filesAnexo" style="visibility:hidden;" type="file" name="anexoPdf" (change)="selecionarAnexo($event)" />
                 </div>
-                <div *ngIf="anexo">
-                  <input type="text" name="inputTituloAnexo" pInputText [(ngModel)]="tituloAnexo" placeholder="Digite o titulo do anexo">  
-                  <textarea placeholder="Digite a descrição do anexo" style="width: 400px;" name="inputDescricaoAnexo" #inputDescricaoAnexo="ngModel" [(ngModel)]="descricaoAnexo" pInputTextarea></textarea>
-                  <button type="submit">Subir</button>
+                <div *ngIf="anexo" class="p-grid p-dir-col">
+                  <div class="p-col p-as-start" style="padding-top: 25px;">
+                    <input type="text" style="width: 400px;"  name="inputTituloAnexo" required pInputText [(ngModel)]="tituloAnexo" placeholder="Digite o titulo do anexo">
+                  </div>
+                  <div class="p-col p-as-start" >
+                    <textarea placeholder="Digite a descrição do anexo" style="width: 400px;" name="inputDescricaoAnexo" #inputDescricaoAnexo="ngModel" [(ngModel)]="descricaoAnexo" pInputTextarea></textarea>
+                  </div>
+                  <div class="p-col p-as-start" >
+                    <button class="p-button ui-button-ativar" [disabled]="formSubirAnexo.invalid" type="submit">Subir</button>
+                  </div>
                 </div>
             </form>
           </div>
@@ -144,14 +152,22 @@
         </p-table>
 
         <div *ngIf="authService.jwtPayload.authorities?.includes('EDITAR_DOCUMENTOS_PERGUNTAS')" class="p-grid" style="margin-left: 20px; margin-top: 20px;">
-            <form #formSubirRegulamento="ngForm" (ngSubmit)="subirGuia()">      
+            <form #formSubirGuia="ngForm" (ngSubmit)="subirGuia()">
                 <div>
-                  <input type="file" name="guiaPdf" (change)="selecionarGuia($event)" />
+                  <label for="filesGuia" class="p-button ui-button-ativar">Escolher Arquivo</label>
+                  {{guia?.name}}
+                  <input id="filesGuia"  style="visibility:hidden;" type="file" name="guiaPdf" (change)="selecionarGuia($event)" />
                 </div>
-                <div *ngIf="guia">
-                  <input type="text" name="inputTituloGuia" pInputText [(ngModel)]="tituloGuia" placeholder="Digite o titulo do guia">  
-                  <textarea placeholder="Digite a descrição do guia" style="width: 400px;" name="inputDescricaoGuia" #inputDescricaoGuia="ngModel" [(ngModel)]="descricaoGuia" pInputTextarea></textarea>
-                  <button type="submit">Subir</button>
+                <div *ngIf="guia" class="p-grid p-dir-col">
+                  <div class="p-col p-as-start" style="padding-top: 25px;">
+                    <input type="text" style="width: 400px;"  name="inputTituloGuia" required pInputText [(ngModel)]="tituloGuia" placeholder="Digite o titulo do guia">
+                  </div>
+                  <div class="p-col p-as-start">
+                    <textarea placeholder="Digite a descrição do guia" style="width: 400px;" name="inputDescricaoGuia" #inputDescricaoGuia="ngModel" [(ngModel)]="descricaoGuia" pInputTextarea></textarea>
+                  </div>
+                  <div class="p-col p-as-start">
+                    <button class="p-button  ui-button-ativar" [disabled]="formSubirGuia.invalid" type="submit">Subir</button>
+                  </div>
                 </div>
             </form>
         </div>
@@ -208,14 +224,22 @@
         </p-table>
 
         <div *ngIf="authService.jwtPayload.authorities?.includes('EDITAR_DOCUMENTOS_PERGUNTAS')" class="p-grid" style="margin-left: 20px; margin-top: 20px;">
-            <form #formSubirRegulamento="ngForm" (ngSubmit)="subirRegulamento()">      
+            <form #formSubirRegulamento="ngForm" (ngSubmit)="subirRegulamento()">
                 <div>
-                  <input type="file" name="regulamentoPdf" (change)="selecionarRegulamento($event)" />
+                  <label for="filesRegulamento" class="p-button ui-button-ativar">Escolher Arquivo</label>
+                  {{regulamento?.name}}
+                  <input id="filesRegulamento"  style="visibility:hidden;"  type="file" name="regulamentoPdf" (change)="selecionarRegulamento($event)" />
                 </div>
-                <div *ngIf="regulamento">
-                  <input type="text" name="inputTituloRegulamento" pInputText [(ngModel)]="tituloRegulamento" placeholder="Digite o titulo do regulamento">  
-                  <textarea placeholder="Digite a descrição do regulamento" style="width: 400px;" name="inputDescricaoAnexo" #inputDescricaoRegulamento="ngModel" [(ngModel)]="descricaoRegulamento" pInputTextarea></textarea>
-                  <button type="submit">Subir</button>
+                <div *ngIf="regulamento" class="p-grid p-dir-col">
+                  <div class="p-col p-as-start" style="padding-top: 25px;">
+                    <input type="text" style="width: 400px;" required name="inputTituloRegulamento" pInputText [(ngModel)]="tituloRegulamento" placeholder="Digite o titulo do regulamento" >
+                  </div>
+                  <div class="p-col p-as-start">
+                    <textarea placeholder="Digite a descrição do regulamento" style="width: 400px;" name="inputDescricaoAnexo" #inputDescricaoRegulamento="ngModel" [(ngModel)]="descricaoRegulamento" pInputTextarea></textarea>
+                  </div>
+                  <div class="p-col p-as-start">
+                    <button class="p-button ui-button-ativar" [disabled]="formSubirRegulamento.invalid" type="submit">Subir</button>
+                  </div>
                 </div>
             </form>
         </div>
