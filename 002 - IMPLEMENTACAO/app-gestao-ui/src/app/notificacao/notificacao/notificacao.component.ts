@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { ErrorHandlerService } from 'src/app/core/error-handler.service';
+import { NotificacaoService } from '../notificacao.service';
 
 @Component({
   selector: 'app-notificacao',
@@ -7,9 +10,25 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NotificacaoComponent implements OnInit {
 
-  constructor() { }
+  codigoUsuario: number;
+
+  notificacoes: [];
+
+  constructor(
+    private notificacaoService: NotificacaoService,
+    private route: ActivatedRoute,
+    private errorHandlerService: ErrorHandlerService
+  ) { }
 
   ngOnInit(): void {
+    this.codigoUsuario = this.route.snapshot.params.codigoUsuario;
+    this.listar();
+  }
+
+  listar(): void {
+    this.notificacaoService.listar(this.codigoUsuario).then(dados => {
+      this.notificacoes = dados;
+    }).catch(error => this.errorHandlerService.handle(error));
   }
 
 }
