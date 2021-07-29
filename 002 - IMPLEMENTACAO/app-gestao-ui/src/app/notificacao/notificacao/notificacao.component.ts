@@ -1,7 +1,9 @@
+import { AuthService } from 'src/app/autenticacao/auth.service';
+import { ErrorHandlerService } from 'src/app/core/error-handler.service';
+import { NotificacaoService } from './../notificacao.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { ErrorHandlerService } from 'src/app/core/error-handler.service';
-import { NotificacaoService } from '../notificacao.service';
+
 
 @Component({
   selector: 'app-notificacao',
