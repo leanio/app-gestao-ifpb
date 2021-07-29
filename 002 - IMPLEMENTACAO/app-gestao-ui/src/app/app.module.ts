@@ -11,11 +11,12 @@ import { CampusModule } from './campus/campus.module';
 import { CoreModule } from './core/core.module';
 import { ProcessosModule } from './processos/processos.module';
 import { UsuariosModule } from './usuarios/usuarios.module';
+import { NotificacaoModule } from './notificacao/notificacao.module';
 
 
 @NgModule({
   declarations: [
-    AppComponent,
+    AppComponent
 
   ],
   imports: [
@@ -29,6 +30,7 @@ import { UsuariosModule } from './usuarios/usuarios.module';
     ProcessosModule,
     CampusModule,
     HomeModule,
+    NotificacaoModule,
 
     AppRoutingModule
   ],
