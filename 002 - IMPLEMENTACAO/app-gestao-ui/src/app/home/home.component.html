@@ -1,4 +1,4 @@
-
+{{authService.jwtPayload | json}}
 
     <div class="p-grid p-jc-center p-ai-center ">
       <div class="p-col-2 ">
@@ -9,7 +9,7 @@
           <div class="p-col-12 p-shadow-10" style="background-color: white; border-radius: 25px; text-align: center; width: 180px;">
             <div style="text-align: center; ">
               <a class="alterar-cor-verde">
-              <i class="pi pi-user" style=" font-size: 10rem;"></i></a>
+              <i routerLink="/usuarios/atualizar/{{authService.jwtPayload.usuario_id}}" class="pi pi-user" style=" font-size: 10rem; cursor: pointer;"></i></a>
             </div>
           </div>
         </div>
@@ -36,10 +36,10 @@
           <div class="p-col-12" style="text-align: center;">
             <H1 class="p-text-bold" style="color: white;">Notificações</H1>
           </div>
-          <div class="p-col-12 p-shadow-10" style="background-color: white; border-radius: 25px; text-align: center; width: 180px;">
+          <div class="p-col-12 p-shadow-10" style="background-color: white; border-radius: 25px; text-align: center; width: 180px; cursor: pointer;">
             <div style="text-align: center; ">
               <a class="alterar-cor-verde">
-              <i class="pi pi-send" style=" font-size: 10rem;"></i></a>
+              <i routerLink="/notificacoes/listar/{{authService.jwtPayload.usuario_id}}"  class="pi pi-send" style=" font-size: 10rem;"></i></a>
             </div>
           </div>
         </div>

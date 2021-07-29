@@ -11,8 +11,8 @@ export class NotificacaoService {
   url = environment.apiUrl + '/usuarios';
 
   constructor(
-  ) { }
     private httpClient: HttpClient
+  ) { }
 
   async listar(codigoUsuario: number): Promise<any> {
     return this.httpClient.get<any>(`${this.url}/${codigoUsuario}/notificacoes`).toPromise();
