@@ -31,6 +31,9 @@
                     <td> <a class="alterar-cor-verde" routerLink="/usuarios/atualizar/{{product.id}}" >
                             <i class="pi pi-search " style="font-size: 1.5rem; "></i>
                          </a>
+                         <a *ngIf="product.tokenFirebase" style="margin-left: 20px; cursor: pointer;" class="alterar-cor-verde" (click)="selecionarUsuarioParaNotificar(product)" >
+                            <i class="pi pi-send" style="font-size: 1.5rem; "></i>
+                         </a>
                     </td>
                 </tr>
             </ng-template>
@@ -41,3 +44,14 @@
     </div>
 </div>
 
+<form autocomplete="off" #formularioNotificacao="ngForm">
+    <p-dialog header="Deseja notificar o usuário {{usuarioNotificacao.nome}}?" [(visible)]="modalNotificacao" [modal]="true" [style]="{width: '600px'}" [baseZIndex]="10000"
+        [draggable]="false" [resizable]="false">
+          <p>Matrícula: {{usuarioNotificacao.matricula}}</p>
+
+          <input [(ngModel)]="notificacao.title" id="inputTitulo" type="text" pInputText name="inputTitulo" ngModel required #inputTitulo placeholder="Digite o titulo" style="width: 100%;">
+          <textarea style="width: 100%; margin-top: 20px;" name="inputMensagem" #inputMensagem="ngModel" [(ngModel)]="notificacao.message" placeholder="Digite o corpo da mensagem" required pInputTextarea></textarea>
+          <button class="ui-button-ativar" [disabled]="formularioNotificacao.invalid" name="confirmarPergunta" style="width: 200px;" (click)="enviarNotificacao()" pButton label="NOTIFICAR"></button>
+
+    </p-dialog>
+</form>

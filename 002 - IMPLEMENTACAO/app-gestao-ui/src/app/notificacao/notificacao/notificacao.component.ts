@@ -2,6 +2,7 @@ import { ErrorHandlerService } from 'src/app/core/error-handler.service';
 import { NotificacaoService } from './../notificacao.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { NotificacaoOutput } from 'src/app/core/model';
 
 
 @Component({
@@ -13,7 +14,7 @@ export class NotificacaoComponent implements OnInit {
 
   codigoUsuario: number;
 
-  notificacoes: [];
+  notificacoes: NotificacaoOutput[];
 
   constructor(
     private notificacaoService: NotificacaoService,

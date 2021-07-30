@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { MessageService } from 'primeng/api';
 import { AuthService } from 'src/app/autenticacao/auth.service';
 import { ErrorHandlerService } from 'src/app/core/error-handler.service';
+import { EnviarNotificacaoInput, UsuarioOutput } from 'src/app/core/model';
+import { NotificacaoService } from 'src/app/notificacao/notificacao.service';
 import { UsuarioService } from '../usuario.service';
 
 @Component({
@@ -12,8 +15,14 @@ export class UsuarioPesquisaComponent implements OnInit {
 
   usuarios = []
 
+  usuarioNotificacao = new UsuarioOutput();
+  notificacao = new EnviarNotificacaoInput();
+  modalNotificacao: boolean;
+
   constructor(
     private usuarioService: UsuarioService,
+    private notificacaoService: NotificacaoService,
+    private messageService: MessageService,
     private errorHandlerService: ErrorHandlerService,
     public authService: AuthService
   ) { }
@@ -26,6 +35,28 @@ export class UsuarioPesquisaComponent implements OnInit {
     this.usuarioService.listar().then(dados => {
       this.usuarios = dados;
     }).catch(erro => this.errorHandlerService.handle(erro));
+  }
+
+  enviarNotificacao(): void {
+    this.notificacaoService.notificar(this.notificacao).then(() => {
+      this.messageService.add({severity: 'success', summary: 'Sucesso', detail: 'Faq ativo'});
+    }).catch(e => this.errorHandlerService. handle(e));
+  }
+
+  selecionarUsuarioParaNotificar(usuario: any): void {
+    this.renovarNotificacao();
+    this.renovarUsuarioNotificacao();
+    this.usuarioNotificacao = usuario;
+    this.notificacao.token = usuario.tokenFirebase;
+    this.modalNotificacao = true;
+  }
+
+  renovarNotificacao(): void {
+    this.notificacao = new EnviarNotificacaoInput();
+  }
+
+  renovarUsuarioNotificacao(): void {
+    this.usuarioNotificacao = new UsuarioOutput();
   }
 
 }

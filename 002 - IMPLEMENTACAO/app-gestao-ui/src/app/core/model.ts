@@ -110,3 +110,19 @@ export class EmailRecoverPassword {
 export class ModelNovaSenha {
     novaSenha: number;
 }
+
+export class EnviarNotificacaoInput {
+    message: string;
+    title: string;
+    token: string;
+    topic: string;
+}
+
+export class EnviarNotificacaoOutput {
+    message: string;
+}
+
+export class NotificacaoOutput {
+    corpo: string;
+    titulo: string;
+}
