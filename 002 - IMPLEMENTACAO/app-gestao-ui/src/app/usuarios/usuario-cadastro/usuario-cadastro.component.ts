@@ -28,7 +28,7 @@ export class UsuarioCadastroComponent implements OnInit {
     private router: Router,
     private messageService: MessageService,
     private authService: AuthService
-    
+
   ) { }
 
   ngOnInit(): void {
@@ -40,7 +40,7 @@ export class UsuarioCadastroComponent implements OnInit {
 
     this.carregarListaCampus();
   }
-  
+
   salvar(form: NgForm) {
     if (this.isEditando()) {
       this.atualizar();
@@ -48,13 +48,13 @@ export class UsuarioCadastroComponent implements OnInit {
       this.adicionar();
     }
   }
-  
+
   carregarUsuario(codigoUsuario: number) {
     this.usuarioService.buscar(codigoUsuario).then(dados => {
       this.usuario.toModel(dados);
     }).catch(error => this.errorHandlerService.handle(error));
   }
-  
+
   carregarListaCampus() {
     this.campusService.listar().then(dados => {
       this.listaCampus = dados.map(d => {

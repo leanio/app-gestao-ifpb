@@ -31,10 +31,10 @@
             </span>
             </div>
             <div class="p-py-3">
-                <p-dropdown [(ngModel)]="usuario.campus.id" filter="true" placeholder="Selecione um campus" [options]="listaCampus" ngModel name="campus"></p-dropdown>
+                <p-dropdown id="selectCampus" [(ngModel)]="usuario.campus.id" filter="true" placeholder="Selecione um campus" [options]="listaCampus" ngModel name="selectC amp"></p-dropdown>
             </div>
             <div class="p-col-5 p-mx-auto">
-                <button class="ui-button-ativar" pButton type="submit" label="{{codigoUsuario ? 'ATUALIZAR' : 'CADASTRAR'}}" [disabled] = "formCadastroUsuario.invalid" style="font-weight: bold; font-size: 20px;"></button>
+                <button id="btnAtualizar" name="atualizar" class="ui-button-ativar" pButton type="submit" label="{{codigoUsuario ? 'ATUALIZAR' : 'CADASTRAR'}}" [disabled] = "formCadastroUsuario.invalid" style="font-weight: bold; font-size: 20px;"></button>
             </div>
         </div>
 

@@ -19,7 +19,7 @@
                     <th>
 
                     </th>
-                    
+
                 </tr>
             </ng-template>
             <ng-template pTemplate="body" let-product>
@@ -39,7 +39,7 @@
             </ng-template>
         </p-table>
     </div>
-    <div class="p-col p-as-end" style="margin-right: 30px; text-align: right; padding-bottom: 20px;" *ngIf="authService.jwtPayload.authorities?.includes('EDITAR_PROCESSOS')">       
+    <div class="p-col p-as-end" style="margin-right: 30px; text-align: right; padding-bottom: 20px;" *ngIf="authService.jwtPayload.authorities?.includes('EDITAR_PROCESSOS')">
         <button class="ui-button-success" routerLink="/usuarios/cadastro" pButton type="button" style="width: 200px; height: 50px; font-weight: bold; font-size: 20px;" label="NOVO USUÁRIO" ></button>
     </div>
 </div>
@@ -50,7 +50,7 @@
           <p>Matrícula: {{usuarioNotificacao.matricula}}</p>
 
           <input [(ngModel)]="notificacao.title" id="inputTitulo" type="text" pInputText name="inputTitulo" ngModel required #inputTitulo placeholder="Digite o titulo" style="width: 100%;">
-          <textarea style="width: 100%; margin-top: 20px;" name="inputMensagem" #inputMensagem="ngModel" [(ngModel)]="notificacao.message" placeholder="Digite o corpo da mensagem" required pInputTextarea></textarea>
+          <textarea style="width: 100%; margin-top: 20px;" id="inputMensagem" name="inputMensagem" #inputMensagem="ngModel" [(ngModel)]="notificacao.message" placeholder="Digite o corpo da mensagem" required pInputTextarea></textarea>
           <button class="ui-button-ativar" [disabled]="formularioNotificacao.invalid" name="confirmarPergunta" style="width: 200px;" (click)="enviarNotificacao()" pButton label="NOTIFICAR"></button>
 
     </p-dialog>
