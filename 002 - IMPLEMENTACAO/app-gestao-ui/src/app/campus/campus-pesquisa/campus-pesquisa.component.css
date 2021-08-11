@@ -1,0 +1,9 @@
+.ui-button-success {
+  background-color: gray;
+}
+.ui-button-success:not([disabled]) {
+  background-color: #00965E;
+}
+.ui-button-success:not([disabled]):hover {
+  background-color: #006842;
+}

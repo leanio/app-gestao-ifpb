@@ -43,15 +43,15 @@
         </div>
       </div>
 
-      <div class="p-col-2 " *ngIf="authService.jwtPayload.authorities?.includes('CONSULTAR_CAMPUS')">
+      <div class="p-col-2 " *ngIf="authService.jwtPayload.responsavel_pelo_campus">
         <div class="p-grid p-jc-center">
           <div class="p-col-12" style="text-align: center;">
             <H1 class="p-text-bold" style="color: white;">Campus</H1>
           </div>
-          <div class="p-col-12 p-shadow-10" style="background-color: white; border-radius: 25px; text-align: center; width: 180px;">
+          <div class="p-col-12 p-shadow-10" style="background-color: white; border-radius: 25px; text-align: center; width: 180px; cursor: pointer;">
             <div style="text-align: center; ">
               <a class="alterar-cor-verde">
-              <i class="pi pi-home" style="font-size: 10rem;"></i></a>
+              <i id="linkCampus" routerLink="{{hubCampus()}}" class="pi pi-home" style="font-size: 10rem;"></i></a>
             </div>
           </div>
         </div>

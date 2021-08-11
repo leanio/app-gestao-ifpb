@@ -13,13 +13,22 @@ export class HomeComponent implements OnInit {
 
   constructor(
     public authService: AuthService
-  ) { 
+  ) {
 
   }
 
   ngOnInit(): void {
     this.codigoCampus = this.authService.jwtPayload.campus_id;
-    
+
+  }
+
+  hubCampus(): String {
+    if (this.authService.jwtPayload.authorities?.includes('CONSULTAR_CAMPUS')) {
+      return "/campus/pesquisa/";
+    }
+    else {
+      return "/notificacoes/listar/" + this.authService.jwtPayload.usuario_id;
+    }
   }
 
 
