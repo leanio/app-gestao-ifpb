@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { NgForm } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ErrorHandlerService } from 'src/app/core/error-handler.service';
 import { CampusInput, UsuarioOutput } from 'src/app/core/model';
 import { UsuarioService } from 'src/app/usuarios/usuario.service';
@@ -16,15 +17,32 @@ export class CampusCadastroComponent implements OnInit {
 
   listaUsuarios: any;
 
+  codigoCampus: number;
+
   constructor(
     private campusService: CampusService,
     private usuarioService: UsuarioService,
     private errorHandlerService: ErrorHandlerService,
-    private router: Router
+    private router: Router,
+    private route: ActivatedRoute
   ) { }
+
+  salvar(form: NgForm) {
+    if (this.isEditando()) {
+      this.atualizar();
+    } else {
+      this.adicionar();
+    }
+  }
 
   ngOnInit(): void {
     this.carregarUsuarios();
+
+    this.codigoCampus = this.route.snapshot.params.codigo;
+
+    if(this.codigoCampus) {
+      this.carregarCampus();
+    }
   }
 
   adicionar(): void {
@@ -33,10 +51,26 @@ export class CampusCadastroComponent implements OnInit {
     }).catch(error => this.errorHandlerService.handle(error));
   }
 
-  carregarUsuarios() {
+  atualizar(): void {
+    this.campusService.atualizar(this.codigoCampus, this.campus).then(() => {
+      this.router.navigateByUrl('/usuarios/pesquisa');
+    }).catch(error => this.errorHandlerService.handle(error));
+  }
+
+  carregarCampus(): void {
+    this.campusService.buscar(this.codigoCampus).then(dados => {
+      this.campus = dados;
+    }).catch(error => this.errorHandlerService.handle(error));
+  }
+
+  carregarUsuarios(): void {
     this.usuarioService.listar().then(dados => {
       this.listaUsuarios = dados;
     }).catch(error => this.errorHandlerService.handle(error));
+  }
+
+  isEditando() {
+    return this.codigoCampus !== undefined;
   }
 
 }

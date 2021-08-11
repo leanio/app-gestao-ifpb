@@ -22,12 +22,11 @@ export class CampusService {
 
   async atualizar(codigoCampus: number, campus: CampusInput): Promise<CampusOutput> {
     const headers = new HttpHeaders({'Content-Type': 'application/json'});
-    console.log(campus);
     
     return this.httpClient.put(this.url + `/${codigoCampus}`, JSON.stringify(campus), {headers}).toPromise().then();
   }
 
-  async buscar(codigo: number): Promise<CampusOutput> {
+  async buscar(codigo: number): Promise<any> {
     return this.httpClient.get<CampusOutput>(this.url + `/${codigo}`).toPromise();
   }
 

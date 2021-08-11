@@ -5,7 +5,8 @@ import { CampusPesquisaComponent } from './campus-pesquisa/campus-pesquisa.compo
 
 const routes: Routes = [
   {path: 'campus/pesquisa', component: CampusPesquisaComponent},
-  {path: 'campus/cadastro', component: CampusCadastroComponent}
+  {path: 'campus/cadastro', component: CampusCadastroComponent},
+  {path: 'campus/atualizar/:codigo', component: CampusCadastroComponent}
 ];
 
 @NgModule({
