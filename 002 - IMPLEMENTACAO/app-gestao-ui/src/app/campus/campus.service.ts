@@ -20,9 +20,13 @@ export class CampusService {
     return this.httpClient.post(this.url, JSON.stringify(campus), {headers}).toPromise().then();
   }
 
-  async atualizar(codigoCampus: number, campus: CampusInput): Promise<CampusOutput> {
+  async atualizar(codigoCampus: number, campus: any): Promise<CampusOutput> {
     const headers = new HttpHeaders({'Content-Type': 'application/json'});
-    
+    delete campus.id;
+    delete campus.responsavel.nome;
+    delete campus.responsavel.email;
+    delete campus.responsavel.matricula;
+    delete campus.responsavel.tokenFirebase;
     return this.httpClient.put(this.url + `/${codigoCampus}`, JSON.stringify(campus), {headers}).toPromise().then();
   }
 
