@@ -27,7 +27,7 @@ export class HomeComponent implements OnInit {
       return "/campus/pesquisa/";
     }
     else {
-      return "/notificacoes/listar/" + this.authService.jwtPayload.usuario_id;
+      return "/campus/atualizar/" + this.authService.jwtPayload.usuario_id;
     }
   }
 

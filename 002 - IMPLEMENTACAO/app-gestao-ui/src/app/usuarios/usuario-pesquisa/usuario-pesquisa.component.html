@@ -28,7 +28,7 @@
                     <td>{{product.email}}</td>
                     <td>{{product.matricula}}</td>
                     <td>{{product.nome}}</td>
-                    <td> <a class="alterar-cor-verde" routerLink="/usuarios/atualizar/{{product.id}}" >
+                    <td> <a *ngIf="authService.jwtPayload.authorities?.includes('CONSULTAR_CAMPUS')" class="alterar-cor-verde" routerLink="/usuarios/atualizar/{{product.id}}" >
                             <i class="pi pi-search " style="font-size: 1.5rem; "></i>
                          </a>
                          <a *ngIf="product.tokenFirebase" style="margin-left: 20px; cursor: pointer;" class="alterar-cor-verde" (click)="selecionarUsuarioParaNotificar(product)" >

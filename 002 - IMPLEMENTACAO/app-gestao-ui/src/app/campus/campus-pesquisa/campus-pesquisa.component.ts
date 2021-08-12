@@ -18,10 +18,15 @@ export class CampusPesquisaComponent implements OnInit {
     this.listar();
   }
 
+  abrir(): void {
+
+  }
+
   listar(): void {
     this.campusService.listar().then(dados => {
       this.listaCampus = dados;
     })
   }
+
 
 }

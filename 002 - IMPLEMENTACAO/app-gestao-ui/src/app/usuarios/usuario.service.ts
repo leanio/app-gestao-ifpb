@@ -10,6 +10,7 @@ import { ModelNovaSenha, UsuarioInput, UsuarioOutput } from '../core/model';
 export class UsuarioService {
 
   url = environment.apiUrl + '/usuarios';
+  urlCampus = environment.apiUrl + '/campus';
 
   constructor(
     private httpClient: HttpClient
@@ -23,7 +24,7 @@ export class UsuarioService {
 
   async atualizar(codigoUsuario: number, usuario: UsuarioInput): Promise<UsuarioOutput> {
     const headers = new HttpHeaders({'Content-Type': 'application/json'});
-    
+
     return this.httpClient.put(this.url + `/${codigoUsuario}`, JSON.stringify(usuario), {headers}).toPromise().then();
   }
 
@@ -39,6 +40,11 @@ export class UsuarioService {
     const headers = new HttpHeaders({'Content-Type': 'application/json'});
 
     return this.httpClient.put(this.url + `/${codigoUsuario}/change-password`, modelNovaSenha, {headers}).toPromise().then();
+  }
+
+  async listarPorCampus(codigoCampus: number): Promise<any> {
+
+    return this.httpClient.get<any>(this.urlCampus + `/${codigoCampus}/usuarios`).toPromise();
   }
 
 }

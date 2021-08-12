@@ -19,6 +19,9 @@
                 <th>RESPONSÁVEL
                     <p-columnFilter type="text" field="nome" display="menu"></p-columnFilter>
                 </th>
+                <th>
+
+                </th>
             </tr>
         </ng-template>
         <ng-template pTemplate="body" let-product>
@@ -28,6 +31,12 @@
                 <td>{{product.nomeInstituicao}}</td>
                 <td>{{product.protocolo.email}}</td>
                 <td>{{product.responsavel.email}}</td>
+                <td>
+                  <a class="alterar-cor-verde">
+                  <i class="pi pi-pencil" routerLink="/campus/atualizar/{{product.id}}" style="font-size: 1.5rem; margin-left: 60px;"></i></a>
+                  <a class="alterar-cor-verde">
+                  <i class="pi pi-search" routerLink="/usuarios/pesquisa/{{product.id}}" style="font-size: 1.5rem; margin-left: 60px;"></i></a>
+                </td>
             </tr>
         </ng-template>
     </p-table>

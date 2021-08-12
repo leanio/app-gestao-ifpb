@@ -39,9 +39,17 @@
             placeholder="Selecione um responsável" [options]="listaUsuarios" ngModel name="responsavel" required>
           </p-dropdown>
         </div>
-        <div class="p-col-5 p-mx-auto">
-          <button pButton type="submit" class="ui-button-ativar" label="CADASTRAR"
-            [disabled]="formCadastroCampus.invalid" style="font-weight: bold; font-size: 20px;"></button>
+        <div class="p-col-16 p-mx-auto">
+          <div class="p-grid p-jc-center p-ai-center ">
+            <div class="p-col-5 ">
+            <button pButton type="submit" class="ui-button-ativar" label="CADASTRAR"
+            [disabled]="formCadastroCampus.invalid" style="font-weight: bold; font-size: 19px;"></button>
+          </div>
+              <div class="p-col-7 ">
+              <button pButton label="LISTAR USUÁRIOS" style="font-weight: bold; font-size: 19px;" routerLink="/usuarios/pesquisa/{{codigoCampus}}"></button>
+            </div>
+            </div>
+
         </div>
       </div>
     </form>

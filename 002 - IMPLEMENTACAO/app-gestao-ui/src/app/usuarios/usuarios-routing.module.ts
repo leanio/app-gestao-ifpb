@@ -6,7 +6,8 @@ import { UsuarioPesquisaComponent } from './usuario-pesquisa/usuario-pesquisa.co
 const routes: Routes = [
   {path: 'usuarios/cadastro', component: UsuarioCadastroComponent},
   {path: 'usuarios/atualizar/:codigo', component: UsuarioCadastroComponent},
-  {path: 'usuarios/pesquisa', component: UsuarioPesquisaComponent}
+  {path: 'usuarios/pesquisa', component: UsuarioPesquisaComponent},
+  {path: 'usuarios/pesquisa/:codigoCampus', component: UsuarioPesquisaComponent}
 ];
 
 @NgModule({
