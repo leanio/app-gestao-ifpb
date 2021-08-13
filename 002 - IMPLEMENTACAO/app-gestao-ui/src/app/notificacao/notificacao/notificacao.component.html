@@ -1,23 +1,38 @@
-<div class="p-grid vertical-container" style="margin-top: 30px; background-color: rgb(255, 255, 255); border-radius: 25px; margin-left: 30px; margin-right: 30px; min-height: 60vh;">
+<div class="p-grid vertical-container"
+  style="margin-top: 30px; background-color: rgb(255, 255, 255); border-radius: 25px; margin-left: 30px; margin-right: 30px; min-height: 60vh;">
   <div style="padding-bottom: 30px; text-align: center;">
     <h1>LISTAGEM DE NOTIFICAÇÕES</h1>
     <p-table [value]="notificacoes" [paginator]="true" [rows]="5">
-        <ng-template pTemplate="header">
-            <tr>
-                <th>Titulo
-                    <p-columnFilter type="text" field="nome" display="menu"></p-columnFilter>
-                </th>
-                <th>Corpo
-                    <p-columnFilter type="text" field="id" display="menu"></p-columnFilter>
-                </th>
-            </tr>
-        </ng-template>
-        <ng-template pTemplate="body" let-product>
-            <tr>
-                <td>{{product.titulo}}</td>
-                <td>{{product.corpo}}</td>
-            </tr>
-        </ng-template>
+      <ng-template pTemplate="header" >
+        <tr>
+          <th style="text-align: center;">Titulo<p-columnFilter type="text" field="nome" display="menu"></p-columnFilter></th>
+          <!-- <th>
+            <p-columnFilter type="text" field="id" display="menu"></p-columnFilter>
+          </th> -->
+          <th></th>
+          <th></th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body"  let-product>
+        <tr >
+          <td style="text-align: center;">{{product.titulo}}</td>
+          <!-- <td>{{product.corpo}}</td> -->
+          <td></td>
+          <td>
+            <a class="alterar-cor-verde">
+            <i class="pi pi-search" (click)="abrirModalDetalhe(product.titulo, product.corpo)" style="font-size: 1.5rem; margin-left: 60px; cursor: pointer; "></i>
+            </a>
+          </td>
+        </tr>
+      </ng-template>
     </p-table>
   </div>
 </div>
+
+<p-dialog header="Notificação Detalhes" [(visible)]="modalDetalhe" [modal]="true" [style]="{width: '600px'}"
+          [baseZIndex]="10000" [draggable]="false" [resizable]="false">
+          <div style="text-align: center;">
+            <p class="p-m-5" style="font-size: 16px; font-weight: bold; ">{{tituloNotificacao}}</p>
+          </div>
+<p class="p-m-0">{{corpoNotificacao}}</p>
+</p-dialog>

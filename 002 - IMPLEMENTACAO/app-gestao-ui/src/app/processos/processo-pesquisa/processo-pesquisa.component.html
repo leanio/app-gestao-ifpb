@@ -136,9 +136,9 @@
                     <!-- <td><button pButton (click)="abrirArquivo(guia.documento.url)" label="Abrir"></button></td> -->
                     <td>
                       <a class="alterar-cor-verde">
-                      <i class="pi pi-search" (click)="abrirArquivo(guia.documento.url)" style="font-size: 1.5rem; margin-left: 60px;"></i></a>
+                      <i class="pi pi-search" (click)="abrirArquivo(guia.documento.url)" style="font-size: 1.5rem; margin-left: 60px; cursor: pointer; "></i></a>
                       <a class="alterar-cor-vermelho">
-                      <i *ngIf="authService.jwtPayload.authorities?.includes('EDITAR_DOCUMENTOS_PERGUNTAS')" class="pi pi-trash" (click)="removerGuia(guia.id)" style="font-size: 1.5rem; margin-left: 60px;"></i></a></td>
+                      <i *ngIf="authService.jwtPayload.authorities?.includes('EDITAR_DOCUMENTOS_PERGUNTAS')" class="pi pi-trash" (click)="removerGuia(guia.id)" style="font-size: 1.5rem; margin-left: 60px; cursor: pointer; "></i></a></td>
                 </tr>
             </ng-template>
         </p-table>

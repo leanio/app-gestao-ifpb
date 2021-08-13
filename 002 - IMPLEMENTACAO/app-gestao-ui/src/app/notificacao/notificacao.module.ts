@@ -1,3 +1,4 @@
+import { DialogModule } from 'primeng/dialog';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -21,6 +22,7 @@ import { NotificacaoComponent } from './notificacao/notificacao.component';
     InputTextModule,
     DropdownModule,
     TableModule,
+    DialogModule,
 
     NotificacaoRoutingModule
   ]
