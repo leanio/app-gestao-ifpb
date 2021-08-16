@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { MessageService } from 'primeng/api';
 import { ErrorHandlerService } from 'src/app/core/error-handler.service';
 import { CampusInput, UsuarioOutput } from 'src/app/core/model';
 import { UsuarioService } from 'src/app/usuarios/usuario.service';
@@ -24,7 +25,8 @@ export class CampusCadastroComponent implements OnInit {
     private usuarioService: UsuarioService,
     private errorHandlerService: ErrorHandlerService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private messageService: MessageService
   ) { }
 
   salvar(form: NgForm) {
@@ -46,14 +48,16 @@ export class CampusCadastroComponent implements OnInit {
   }
 
   adicionar(): void {
-    this.campusService.adicionar(this.campus).then(() => {
-      this.router.navigateByUrl('/usuarios/pesquisa');
+    this.campusService.adicionar(this.campus).then(campusCadastrado => {
+      this.router.navigateByUrl(`/usuarios/pesquisa/${campusCadastrado.id}`);
+      this.messageService.add({severity: 'success', summary: 'Sucesso', detail: 'Campus cadastrado'});
     }).catch(error => this.errorHandlerService.handle(error));
   }
 
   atualizar(): void {
     this.campusService.atualizar(this.codigoCampus, this.campus).then(() => {
-      this.router.navigateByUrl('/usuarios/pesquisa');
+      this.router.navigateByUrl(`/usuarios/pesquisa/${this.codigoCampus}`);
+      this.messageService.add({severity: 'success', summary: 'Sucesso', detail: 'Campus atualizado'});
     }).catch(error => this.errorHandlerService.handle(error));
   }
 

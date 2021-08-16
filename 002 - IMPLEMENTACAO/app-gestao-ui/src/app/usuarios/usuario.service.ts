@@ -28,8 +28,8 @@ export class UsuarioService {
     return this.httpClient.put(this.url + `/${codigoUsuario}`, JSON.stringify(usuario), {headers}).toPromise().then();
   }
 
-  async buscar(codigo: number): Promise<UsuarioOutput> {
-    return this.httpClient.get<UsuarioOutput>(this.url + `/${codigo}`).toPromise();
+  async buscar(codigo: number): Promise<any> {
+    return this.httpClient.get<any>(this.url + `/${codigo}`).toPromise();
   }
 
   async listar(): Promise<any> {

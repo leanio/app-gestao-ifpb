@@ -5,7 +5,7 @@ import { MessageService } from 'primeng/api';
 import { AuthService } from 'src/app/autenticacao/auth.service';
 import { CampusService } from 'src/app/campus/campus.service';
 import { ErrorHandlerService } from 'src/app/core/error-handler.service';
-import { CampusOutput, UsuarioInput } from 'src/app/core/model';
+import { CampusInput, CampusOutput, UsuarioInput } from 'src/app/core/model';
 import { UsuarioService } from '../usuario.service';
 
 @Component({
@@ -27,7 +27,7 @@ export class UsuarioCadastroComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private messageService: MessageService,
-    private authService: AuthService
+    public authService: AuthService
 
   ) { }
 
@@ -51,15 +51,22 @@ export class UsuarioCadastroComponent implements OnInit {
 
   carregarUsuario(codigoUsuario: number) {
     this.usuarioService.buscar(codigoUsuario).then(dados => {
-      this.usuario.toModel(dados);
+      if (!dados.campus) {
+        dados.campus =  {id: Number}
+      }
+      this.usuario = dados;
+
     }).catch(error => this.errorHandlerService.handle(error));
   }
 
   carregarListaCampus() {
     this.campusService.listar().then(dados => {
-      this.listaCampus = dados.map(d => {
-        return {label: d.nomeCampus + ' - ' + d.nomeInstituicao, value: d.id}
-      })
+      this.listaCampus = dados.map(campus => {
+        const campusModificado = {
+          nomeCampusCompleto: `${campus.nomeCampus} - ${campus.nomeInstituicao}`,
+        ...campus}
+        return campusModificado;
+      });
     }).catch(error => this.errorHandlerService.handle(error));
   }
 
@@ -77,7 +84,7 @@ export class UsuarioCadastroComponent implements OnInit {
 
   atualizar() {
     this.usuarioService.atualizar(this.codigoUsuario, this.usuario).then(dados => {
-      this.router.navigateByUrl('/usuarios/pesquisa');
+      this.router.navigateByUrl(`usuarios/atualizar/${this.codigoUsuario}`);
       this.messageService.add({severity: 'success', summary: 'Sucesso', detail: 'Usuário atualizado'});
     }).catch(error => this.errorHandlerService.handle(error));
   }

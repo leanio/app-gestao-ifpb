@@ -42,6 +42,7 @@ export class AppComponent implements OnInit {
 
   verificarAutenticacao(): void {
     if (!this.authService.isAutenticado() && !this.urlDesbloqueadas.includes(this.urlAtual)) {
+      this.authService.logout();
       this.navegarParaLogin();
     }
   }

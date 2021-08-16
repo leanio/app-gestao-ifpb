@@ -4,7 +4,7 @@
     <form #formCadastroCampus="ngForm" (ngSubmit)="salvar(formCadastroCampus)">
       <div class="p-fluid  p-mx-auto">
         <div class="p-text-center">
-          <h1>CADASTRO DE CAMPUS</h1>
+          <h1>{{isEditando() ? 'ATUALIZAÇÃO' : 'CADASTRO'}} DE CAMPUS</h1>
         </div>
         <div class="p-py-3">
           <span class="p-float-label">
@@ -35,14 +35,14 @@
           </span>
         </div>
         <div class="p-py-3">
-          <p-dropdown [(ngModel)]="campus.responsavel.id" optionLabel="matricula" optionValue="id" filter="true"
+          <p-dropdown [(ngModel)]="campus.responsavel.id" optionLabel="email" optionValue="id" filter="true"
             placeholder="Selecione um responsável" [options]="listaUsuarios" ngModel name="responsavel" required>
           </p-dropdown>
         </div>
         <div class="p-col-16 p-mx-auto">
           <div class="p-grid p-jc-center p-ai-center ">
             <div class="p-col-5 ">
-            <button pButton type="submit" class="ui-button-ativar" label="CADASTRAR"
+            <button pButton type="submit" class="ui-button-ativar" label="{{isEditando() ? 'ATUALIZAR':'CADASTRAR'}}"
             [disabled]="formCadastroCampus.invalid" style="font-weight: bold; font-size: 19px;"></button>
           </div>
               <div class="p-col-7 ">

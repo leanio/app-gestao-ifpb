@@ -53,7 +53,8 @@ export class UsuarioPesquisaComponent implements OnInit {
 
   enviarNotificacao(): void {
     this.notificacaoService.notificar(this.notificacao).then(() => {
-      this.messageService.add({severity: 'success', summary: 'Sucesso', detail: 'Faq ativo'});
+      this.modalNotificacao = false;
+      this.messageService.add({severity: 'success', summary: 'Sucesso', detail: 'Notificação enviada'});
     }).catch(e => this.errorHandlerService. handle(e));
   }
 
