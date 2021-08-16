@@ -31,7 +31,8 @@
                 <H6 id="h6Email" class="p-text-bold" style="color: white; font-size: 12px;">{{authService.jwtPayload.email}}</H6>
             </div>
             <div class="p-col-1 ">
-                <i class="pi pi-bell" style="color: white;"></i>
+                <a class="alterar-cor-verde">
+                <i class="pi pi-bell" style="color: white; cursor: pointer;" routerLink="/notificacoes/listar/{{authService.jwtPayload.usuario_id}}"></i></a>
             </div>
             <div class="p-col-1 ">
               <a class="alterar-cor-vermelho">

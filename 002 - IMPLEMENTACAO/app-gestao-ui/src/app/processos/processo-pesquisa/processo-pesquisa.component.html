@@ -39,9 +39,9 @@
         <p-table [value]="processo.anexos" [paginator]="true" [rows]="5">
             <ng-template pTemplate="header">
                 <tr>
-                    <th>ID
+                    <!-- <th>ID
                         <p-columnFilter type="text" field="id" display="menu"></p-columnFilter>
-                    </th>
+                    </th> -->
                     <th>ID DOCUMENTO
                         <p-columnFilter type="text" field="email" display="menu"></p-columnFilter>
                     </th>
@@ -62,7 +62,7 @@
             </ng-template>
             <ng-template pTemplate="body" let-anexo>
                 <tr>
-                    <td>{{anexo.id}}</td>
+                    <!-- <td>{{anexo.id}}</td> -->
                     <td>{{anexo.documento.id}}</td>
                     <td>{{anexo.documento.contentType}}</td>
                     <td>{{anexo.documento.titulo}}</td>
@@ -105,9 +105,9 @@
         <p-table [value]="processo.guias" [paginator]="true" [rows]="5">
             <ng-template pTemplate="header">
                 <tr>
-                    <th>ID
+                    <!-- <th>ID
                         <p-columnFilter type="text" field="id" display="menu"></p-columnFilter>
-                    </th>
+                    </th> -->
                     <th>ID DOCUMENTO
                         <p-columnFilter type="text" field="email" display="menu"></p-columnFilter>
                     </th>
@@ -128,7 +128,7 @@
             </ng-template>
             <ng-template pTemplate="body" let-guia>
                 <tr>
-                    <td>{{guia.id}}</td>
+                    <!-- <td>{{guia.id}}</td> -->
                     <td>{{guia.documento.id}}</td>
                     <td>{{guia.documento.contentType}}</td>
                     <td>{{guia.documento.titulo}}</td>
@@ -172,9 +172,9 @@
         <p-table [value]="processo.regulamentos" [paginator]="true" [rows]="5">
             <ng-template pTemplate="header">
                 <tr>
-                    <th>ID
+                    <!-- <th>ID
                         <p-columnFilter type="text" field="id" display="menu"></p-columnFilter>
-                    </th>
+                    </th> -->
                     <th>ID DOCUMENTO
                         <p-columnFilter type="text" field="email" display="menu"></p-columnFilter>
                     </th>
@@ -195,7 +195,7 @@
             </ng-template>
             <ng-template pTemplate="body" let-regulamento>
                 <tr>
-                    <td>{{regulamento.id}}</td>
+                    <!-- <td>{{regulamento.id}}</td> -->
                     <td>{{regulamento.documento.id}}</td>
                     <td>{{regulamento.documento.contentType}}</td>
                     <td>{{regulamento.documento.titulo}}</td>
