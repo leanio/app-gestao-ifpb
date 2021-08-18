@@ -29,7 +29,7 @@
         </ng-template>
     </p-table>
   </div>
-  <div class="p-col p-as-end" style="margin-right: 30px; text-align: right; padding-bottom: 20px;" *ngIf="authService.jwtPayload.authorities?.includes('EDITAR_PROCESSOS')">
+  <div class="p-col p-as-end" style="margin-right: 30px; text-align: right; padding-bottom: 20px;" *ngIf="authService.jwtPayload.responsavel_pelo_campus && codigoCampus == authService.jwtPayload.campus_id">
     <button id="botaoNovoProcesso" class="ui-button-success" routerLink="/processos/cadastro/{{codigoCampus}}" pButton type="button" style="width: 200px; height: 50px; font-weight: bold; font-size: 20px;" label="NOVO PROCESSO" ></button>
   </div>
 </div>
