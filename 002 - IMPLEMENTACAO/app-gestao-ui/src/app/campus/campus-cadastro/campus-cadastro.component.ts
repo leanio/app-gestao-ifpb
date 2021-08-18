@@ -49,15 +49,15 @@ export class CampusCadastroComponent implements OnInit {
 
   adicionar(): void {
     this.campusService.adicionar(this.campus).then(campusCadastrado => {
-      this.router.navigateByUrl(`/usuarios/pesquisa/${campusCadastrado.id}`);
       this.messageService.add({severity: 'success', summary: 'Sucesso', detail: 'Campus cadastrado'});
+      this.router.navigateByUrl(`/usuarios/pesquisa/${campusCadastrado.id}`);
     }).catch(error => this.errorHandlerService.handle(error));
   }
 
   atualizar(): void {
     this.campusService.atualizar(this.codigoCampus, this.campus).then(() => {
-      this.router.navigateByUrl(`/usuarios/pesquisa/${this.codigoCampus}`);
       this.messageService.add({severity: 'success', summary: 'Sucesso', detail: 'Campus atualizado'});
+      this.router.navigateByUrl(`/usuarios/pesquisa/${this.codigoCampus}`);
     }).catch(error => this.errorHandlerService.handle(error));
   }
 
